@@ -1,53 +1,38 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React from 'react';
+import {AppRegistry, Text, Alert} from 'react-native';
+import {Container, Header, Footer, Title, Content, Button, Icon } from 'native-base';
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import {styles} from "./lib/styles";
 
-class BeaconNavigator extends Component {
-  render() {
+const BeaconNavigator = React.createClass({
+  alertTitle: "Alert Title",
+  alertMessage: "This is an Alert Message",
+
+  triggerAlert: function(){
+    return Alert.alert(this.alertTitle, this.alertMessage)
+  },
+
+  render: function(){
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <Container style={styles.container}>
+        <Header style={styles.header}>
+          <Title style={styles.title}>Beacon Navigator</Title>
+        </Header>
+
+        <Content style={styles.content}>
+          <Text style={styles.text}>Tap the button to detect nearby points of interest based on proximity to Bluetooth beacons.</Text>
+        </Content>
+
+        <Footer style={styles.footer}>
+          <Button style={styles.button} onPress={this.triggerAlert}>
+            <Icon name="ios-radio-outline" />
+          </Button>
+        </Footer>
+      </Container>
     );
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
 });
 
-AppRegistry.registerComponent('BeaconNavigator', () => BeaconNavigator);
+AppRegistry.registerComponent('BeaconNavigator', function(){
+  return BeaconNavigator;
+});
