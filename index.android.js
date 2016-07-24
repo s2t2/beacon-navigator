@@ -16,7 +16,7 @@ const BeaconNavigator = React.createClass({
     return (
       <Container style={styles.container}>
         <Header style={styles.header}>
-          <Title style={styles.title}>Beacon Navigator</Title>
+          <Text style={styles.title}>Beacon Navigator</Text>
         </Header>
 
         <Content style={styles.content}>
