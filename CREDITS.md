@@ -104,3 +104,4 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
 ## Bluetooth Scanning
 
   + https://github.com/yonahforst/react-native-discovery
+  + https://github.com/yonahforst/react-native-discovery#android

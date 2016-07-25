@@ -1,6 +1,7 @@
 package com.beaconnavigator;
 
 import com.facebook.react.ReactActivity;
+import com.joshblour.reactnativediscovery.ReactNativeDiscoveryPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -11,5 +12,14 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "BeaconNavigator";
+    }
+
+
+    @Override
+    protected List<ReactPackage> getPackages() {
+        return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new ReactNativeDiscoveryPackage(this) // <------ add the package
+        );
     }
 }
