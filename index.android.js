@@ -4,6 +4,7 @@ import {Container, Header, Footer, Content, Button, Icon, List, ListItem} from '
 import Beacons from 'react-native-beacons-android';
 
 import {styles} from "./lib/styles";
+//import {lookupTable} from "./lib/beacons_lookup_table";
 
 const BeaconNavigator = React.createClass({
 
@@ -21,12 +22,8 @@ const BeaconNavigator = React.createClass({
   },
 
   componentDidMount: function(){
-    var component = this;
     console.log("COMPONENT DID MOUNT")
-    this.beaconsDidRange = DeviceEventEmitter.addListener("beaconsDidRange", function(data){
-      component.prettyLogBeacons(data.beacons)
-      //this.setState({nearbyBeacons: data.beacons});
-    });
+    this.beaconsDidRange = DeviceEventEmitter.addListener("beaconsDidRange", this.emitBeaconData);
   },
 
   componentWillUnmount: function(){
@@ -77,24 +74,43 @@ const BeaconNavigator = React.createClass({
     return beacon.uuid + "..." + beacon.major + "..." + beacon.minor
   },
 
-  prettyLogBeacons: function(beacons){
+  //
+  // This function controls what happens with the results of beacon-detection efforts.
+  //
+  emitBeaconData: function(data){
+    this.logBeacons(data.beacons)
+    //this.logProximityToKnownBeacons(data.beacons)
+    //this.setState({nearbyBeacons: data.beacons});
+  },
+
+  //
+  // Use this function to more easily understand which beacons are nearby.
+  //
+  logBeacons: function(beacons){
     var component = this;
     var near = beacons.filter(function(b){  return b["proximity"] == "near" })
     var far = beacons.filter(function(b){  return b["proximity"] == "far" })
     var whereverYouAre = beacons.filter(function(b){  return b["proximity"] == "immediate" })
-    //console.log(
-    //  "NOW:", Date.now(),
-    //  //"ALL:", beacons.length, beacons.map(function(b){  return component.beaconId(b)  }),
-    //  "LOC :", whereverYouAre.map(function(b){  return component.beaconId(b)  }),
-    //  "NEAR:", near.map(function(b){  return component.beaconId(b)  }),
-    //  "FAR :", far.map(function(b){  return component.beaconId(b)  })
-    //)
     console.log("------------------")
     console.log("NOW:", Date.now())
     console.log("LOC:", whereverYouAre.map(function(b){  return component.beaconId(b)  }))
     console.log("NEAR:", near.map(function(b){  return component.beaconId(b)  }))
     console.log("FAR :", far.map(function(b){  return component.beaconId(b)  }))
   },
+
+  ////
+  //// Use this function to track the proximity of known beacons over time.
+  ////
+  //logProximityToKnownBeacons: function(beacons){
+  //  var purple = beacons.select(function(b){  return beaconId(b) == beaconId(lookupTable["PURPLE"]) })
+  //  var teal = beacons.select(function(b){  return beaconId(b) == beaconId(lookupTable["TEAL"]) })
+  //  var green = beacons.select(function(b){  return beaconId(b) == beaconId(lookupTable["GREEN"]) })
+  //  console.log("------------------")
+  //  console.log("NOW:", Date.now())
+  //  console.log("PURPLE:")
+  //  console.log("TEAL:")
+  //  console.log("GREEN:")
+  //},
 
   alertTitle: "Alert Title",
   alertMessage: "This is an Alert Message",
