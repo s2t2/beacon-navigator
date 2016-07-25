@@ -660,3 +660,5 @@ This document contains the results of beacon mobility experiment
 # Observations
 
 Perhaps distance is being measured in feet or some relative metric instead of meters.
+
+Distance is probably a function of both beacon proximity and strength.
