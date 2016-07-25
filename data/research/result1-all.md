@@ -1,4 +1,7 @@
-This document contains the results of beacon detection when there are four beacons sitting on the desk next to the phone.
+# Beacon Identification Experiment - All
+
+This document contains the results of beacon detection
+  when all four test beacons are on the desk next to the phone.
 
 ```` sh
 07-25 18:31:04.462 12790 13001 I ReactNativeJS: Running application "BeaconNavigator" with appParams: {"initialProps":{},"rootTag":1}. __DEV__ === true, development-level warning are ON, performance optimizations are OFF
@@ -113,3 +116,5 @@ Only two of the four beacons are getting detected:
 
   + `b9407f30-f5f8-466e-aff9-25556b57fe6d...29661...10707`
   + `b9407f30-f5f8-466e-aff9-25556b57fe6d...50644...34745`
+
+Perhaps some of the beacons are not working, or perhaps when in close proximity to eachother they create interference.

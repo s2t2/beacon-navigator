@@ -18,7 +18,13 @@ npm install
 
 ## Usage
 
-Ensure an android emulator is running or an android device is connected, then package and run the application:
+Ensure an android emulator is running or an android device is connected:
+
+```` sh
+/Users/YOUR_USERNAME/Library/Android/sdk/platform-tools/adb devices
+````
+
+Then package and run the application:
 
 ```` sh
 react-native run-android
