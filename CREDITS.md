@@ -51,8 +51,9 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
 
   + http://www.color-hex.com/color-palette/5452
 
+### Debugging
 
-
+  + https://facebook.github.io/react-native/docs/debugging.html
 
 
 
@@ -105,3 +106,5 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
 
   + https://github.com/yonahforst/react-native-discovery
   + https://github.com/mmazzarolo/react-native-beacons-android
+  + https://github.com/MacKentoch/reactNativeBeaconExample/blob/master/index.android.js
+  + https://medium.com/@erwan.datin/mmazzarolohow-to-play-with-ibeacons-in-a-react-native-application-5cef754b2edc#.cjqg5o5uj
