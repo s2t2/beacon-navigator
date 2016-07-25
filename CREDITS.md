@@ -77,10 +77,29 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
   + https://developer.android.com/studio/install.html
   + http://stackoverflow.com/questions/32228979/android-gradle-project-sync-failed-due-to-target-version
   + http://stackoverflow.com/questions/27272605/failed-to-find-build-tools-revision-21-1-1-sdk-up-to-date#comment52464209_29395631
-  + https://github.com/facebook/react-native/issues/4074
+  + https://developer.android.com/training/basics/firstapp/running-app.html
+
+#### Virtual Devices
+
   + https://developer.android.com/studio/build/building-cmdline.html#RunningOnEmulator
   + https://developer.android.com/studio/run/managing-avds.html
-  + https://developer.android.com/training/basics/firstapp/running-app.html
+  + https://github.com/facebook/react-native/issues/4074
+
+#### Real Devices
+
+  + https://developer.android.com/training/basics/firstapp/running-app.html#RealDevice
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Bluetooth Scanning
 
