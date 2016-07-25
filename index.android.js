@@ -26,6 +26,9 @@ const BeaconNavigator = React.createClass({
   //},
 
   render: function(){
+    var component = this;
+    var beacons = component.state.nearbyBeacons;
+
     return (
       <Container style={styles.container}>
         <Header style={styles.header}>
@@ -36,9 +39,9 @@ const BeaconNavigator = React.createClass({
           <Text style={styles.text}>Tap the button to detect nearby points of interest based on proximity to Bluetooth beacons.</Text>
           <List>
             {
-              this.state.nearbyBeacons.map(function(beacon){
+              beacons.map(function(beacon){
                 return (
-                  <ListItem itemDivider key={beacon.uuid}>
+                  <ListItem key={beacon.uuid} itemDivider={component.isEvenNumber(beacons.indexOf(beacon))}>
                     <Text>{beacon.name}</Text>
                   </ListItem>
                 );
@@ -54,6 +57,11 @@ const BeaconNavigator = React.createClass({
         </Footer>
       </Container>
     );
+  },
+
+  isEvenNumber: function(listItemIndex){
+    console.log("INDEX", listItemIndex, "SHOULD BE DEVIDED?", (listItemIndex % 2) == 0)
+    return (listItemIndex % 2) == 0
   },
 
   alertTitle: "Alert Title",
