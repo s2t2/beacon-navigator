@@ -1,0 +1,14 @@
+{
+  "beacons": [
+    {
+      "proximity": "near",
+      "distance": 2.609448075880577,
+      "rssi": -93,
+      "minor": 10707,
+      "major": 29661,
+      "uuid": "b9407f30-f5f8-466e-aff9-25556b57fe6d"
+    }
+  ],
+  "uuid": null,
+  "identifier": "REGION1"
+}
