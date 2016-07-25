@@ -4,9 +4,13 @@ import {Container, Header, Footer, Content, Button, Icon, List, ListItem} from '
 import Beacons from 'react-native-beacons-android';
 
 import {styles} from "./lib/styles";
-//import {lookupTable} from "./lib/beacons_lookup_table";
+import {lookupTable} from "./lib/lookup_table";
 
 const BeaconNavigator = React.createClass({
+
+  //
+  // REACT COMPONENT LIFECYCLE EVENTS
+  //
 
   getInitialState: function(){
     console.log("GETTING INITIAL STATE")
@@ -30,6 +34,10 @@ const BeaconNavigator = React.createClass({
     console.log("COMPONENT WILL UNMOUNT")
     this.beaconsDidRange = null;
   },
+
+  //
+  // REACT COMPONENT RENDER METHOD
+  //
 
   render: function(){
     var component = this;
@@ -70,16 +78,32 @@ const BeaconNavigator = React.createClass({
     return (listItemIndex % 2) == 0
   },
 
+  //
+  // BEACON INSTANCE METHODS
+  //
+
   beaconId: function(beacon){
     return beacon.uuid + "..." + beacon.major + "..." + beacon.minor
   },
+
+  beaconProximity: function(beacon){
+    if (beacon) {
+      return beacon.proximity.toLocaleUpperCase() + " @ " + beacon.distance.toFixed(2) + " meters (" + beacon.rssi + " strength)"
+    } else {
+      return "N/A"
+    }
+  },
+
+  //
+  // BEACON DETECTION LOGGER METHODS
+  //
 
   //
   // This function controls what happens with the results of beacon-detection efforts.
   //
   emitBeaconData: function(data){
-    this.logBeacons(data.beacons)
-    //this.logProximityToKnownBeacons(data.beacons)
+    //this.logBeacons(data.beacons)
+    this.logProximityOfKnownBeacons(data.beacons)
     //this.setState({nearbyBeacons: data.beacons});
   },
 
@@ -88,9 +112,9 @@ const BeaconNavigator = React.createClass({
   //
   logBeacons: function(beacons){
     var component = this;
-    var near = beacons.filter(function(b){  return b["proximity"] == "near" })
-    var far = beacons.filter(function(b){  return b["proximity"] == "far" })
-    var whereverYouAre = beacons.filter(function(b){  return b["proximity"] == "immediate" })
+    var near = beacons.filter(function(b){  return b.proximity == "near" })
+    var far = beacons.filter(function(b){  return b.proximity == "far" })
+    var whereverYouAre = beacons.filter(function(b){  return b.proximity == "immediate" })
     console.log("------------------")
     console.log("NOW:", Date.now())
     console.log("LOC:", whereverYouAre.map(function(b){  return component.beaconId(b)  }))
@@ -98,19 +122,24 @@ const BeaconNavigator = React.createClass({
     console.log("FAR :", far.map(function(b){  return component.beaconId(b)  }))
   },
 
-  ////
-  //// Use this function to track the proximity of known beacons over time.
-  ////
-  //logProximityToKnownBeacons: function(beacons){
-  //  var purple = beacons.select(function(b){  return beaconId(b) == beaconId(lookupTable["PURPLE"]) })
-  //  var teal = beacons.select(function(b){  return beaconId(b) == beaconId(lookupTable["TEAL"]) })
-  //  var green = beacons.select(function(b){  return beaconId(b) == beaconId(lookupTable["GREEN"]) })
-  //  console.log("------------------")
-  //  console.log("NOW:", Date.now())
-  //  console.log("PURPLE:")
-  //  console.log("TEAL:")
-  //  console.log("GREEN:")
-  //},
+  //
+  // Use this function to track the proximity of known beacons over time.
+  //
+  logProximityOfKnownBeacons: function(beacons){
+    var component = this;
+    var purple = beacons.filter(function(b){  return component.beaconId(b) == component.beaconId(lookupTable["PURPLE"]) })[0]
+    var blue = beacons.filter(function(b){  return component.beaconId(b) == component.beaconId(lookupTable["BLUE"]) })[0]
+    var green = beacons.filter(function(b){  return component.beaconId(b) == component.beaconId(lookupTable["GREEN"]) })[0]
+    console.log("------------------")
+    console.log("NOW:", Date.now())
+    console.log("PURPLE:", component.beaconProximity(purple))
+    console.log("BLUE:", component.beaconProximity(blue))
+    console.log("GREEN:", component.beaconProximity(green))
+  },
+
+  //
+  // ALERT METHODS
+  //
 
   alertTitle: "Alert Title",
   alertMessage: "This is an Alert Message",
