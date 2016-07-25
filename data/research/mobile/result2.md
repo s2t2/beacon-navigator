@@ -1,4 +1,4 @@
-# Beacon Mobility Experiment #1
+# Beacon Mobility Experiment #2
 
 This document contains the results of beacon mobility experiment
   whereby all three *estimote* beacons start across the room, perhaps 12 meters away,
@@ -6,6 +6,8 @@ This document contains the results of beacon mobility experiment
   each beacon is moved in a straight line towards the phone,
   then held next to the phone for a few seconds
   before being returned in a straight-line back to its origin.
+
+## Purple
 
 ```` sh
 07-25 23:36:35.936  6800  6865 I ReactNativeJS: Running application "BeaconNavigator" with appParams: {"initialProps":{},"rootTag":1}. __DEV__ === true, development-level warning are ON, performance optimizations are OFF
@@ -263,6 +265,11 @@ This document contains the results of beacon mobility experiment
 07-25 23:37:36.468  6800  6865 I ReactNativeJS: 'PURPLE:', 'N/A'
 07-25 23:37:36.469  6800  6865 I ReactNativeJS: 'BLUE:', 'N/A'
 07-25 23:37:36.469  6800  6865 I ReactNativeJS: 'GREEN:', 'N/A'
+````
+
+## Blue
+
+```` sh
 07-25 23:37:37.696  6800  6865 I ReactNativeJS: ------------------
 07-25 23:37:37.696  6800  6865 I ReactNativeJS: 'NOW:', 1469482657696
 07-25 23:37:37.696  6800  6865 I ReactNativeJS: 'PURPLE:', 'N/A'
@@ -403,6 +410,11 @@ This document contains the results of beacon mobility experiment
 07-25 23:38:10.307  6800  6865 I ReactNativeJS: 'PURPLE:', 'NEAR @ 2.32 meters (-93 strength)'
 07-25 23:38:10.307  6800  6865 I ReactNativeJS: 'BLUE:', 'N/A'
 07-25 23:38:10.307  6800  6865 I ReactNativeJS: 'GREEN:', 'N/A'
+````
+
+## Green
+
+```` sh
 07-25 23:38:11.514  6800  6865 I ReactNativeJS: ------------------
 07-25 23:38:11.514  6800  6865 I ReactNativeJS: 'NOW:', 1469482691514
 07-25 23:38:11.514  6800  6865 I ReactNativeJS: 'PURPLE:', 'N/A'
@@ -645,6 +657,6 @@ This document contains the results of beacon mobility experiment
 07-25 23:39:08.618  6800  6865 I ReactNativeJS: 'GREEN:', 'NEAR @ 2.85 meters (-96 strength)'
 ````
 
-## Observations
+# Observations
 
 Perhaps distance is being measured in feet or some relative metric instead of meters.
