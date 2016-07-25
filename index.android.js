@@ -1,6 +1,6 @@
 import React from 'react';
-import {AppRegistry, Text, Alert} from 'react-native';
-import {Container, Header, Footer, Content, Button, Icon, List, ListItem } from 'native-base';
+import {AppRegistry, Text, Alert, DeviceEventEmitter} from 'react-native';
+import {Container, Header, Footer, Content, Button, Icon, List, ListItem} from 'native-base';
 import Beacons from 'react-native-beacons-android';
 
 import {styles} from "./lib/styles";
@@ -18,12 +18,27 @@ const BeaconNavigator = React.createClass({
     }
   },
 
-  //componentWillMount: function(){
-  //  Beacons.detectIBeacons();
-  //  Beacons.startRangingBeaconsInRegion('REGION1')
-  //    .then(function(){  console.log("Beacon Ranging OK")  })
-  //    .catch(function(error){  console.log("Beacon Ranging ERR", err)  })
-  //},
+  componentWillMount: function(){
+    console.log("COMPONENT WILL MOUNT")
+    Beacons.detectIBeacons();
+    Beacons.startRangingBeaconsInRegion('REGION1')
+      .then(function(){  console.log("Beacon Ranging OK")  })
+      .catch(function(error){  console.log("Beacon Ranging ERR", err)  })
+  },
+
+  componentDidMount: function(){
+    console.log("COMPONENT DID MOUNT")
+    this.beaconsDidRange = DeviceEventEmitter.addListener("beaconsDidRange", function(data){
+      console.log(data)
+      console.log(data.beacons)
+      //this.setState({nearbyBeacons: data.beacons});
+    });
+  },
+
+  componentWillUnmount: function(){
+    console.log("COMPONENT WILL UNMOUNT")
+    this.beaconsDidRange = null;
+  },
 
   render: function(){
     var component = this;
