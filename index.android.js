@@ -7,15 +7,16 @@ import {styles} from "./lib/styles";
 
 const BeaconNavigator = React.createClass({
 
-  //getInitialState: function(){
-  //  return {
-  //    nearbyBeacons:[
-  //      {uuid:"A", name:"Beacon Un"},
-  //      {uuid:"B", name:"Beacon Du"},
-  //      {uuid:"C", name:"Beacon Trios"},
-  //    ]
-  //  }
-  //},
+  getInitialState: function(){
+    console.log("GETTING INITIAL STATE")
+    return {
+      nearbyBeacons:[
+        {uuid:"A", name:"Beacon Un"},
+        {uuid:"B", name:"Beacon Deux"},
+        {uuid:"C", name:"Beacon Trios"},
+      ]
+    }
+  },
 
   //componentWillMount: function(){
   //  Beacons.detectIBeacons();
@@ -33,27 +34,16 @@ const BeaconNavigator = React.createClass({
 
         <Content style={styles.content}>
           <Text style={styles.text}>Tap the button to detect nearby points of interest based on proximity to Bluetooth beacons.</Text>
-
           <List>
-            <ListItem itemDivider>
-              <Text>Goalkeeper</Text>
-            </ListItem>
-
-            <ListItem >
-              <Text>Simon Mignolet</Text>
-            </ListItem>
-
-            <ListItem itemDivider>
-              <Text>Defenders</Text>
-            </ListItem>
-
-            <ListItem>
-              <Text>Nathaniel Clyne</Text>
-            </ListItem>
-
-            <ListItem itemDivider>
-              <Text>Dejan Lovren</Text>
-            </ListItem>
+            {
+              this.state.nearbyBeacons.map(function(beacon){
+                return (
+                  <ListItem itemDivider key={beacon.uuid}>
+                    <Text>{beacon.name}</Text>
+                  </ListItem>
+                );
+              })
+            }
           </List>
         </Content>
 
