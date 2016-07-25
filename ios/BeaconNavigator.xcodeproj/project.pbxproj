@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -23,6 +22,15 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		BC529A536BDC4ABB83044795 /* Andale Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7CF45E54B774A99B9CE23A0 /* Andale Mono.ttf */; };
+		5394845D285C47B68601FE17 /* Arial Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC051C466DF04298984311FA /* Arial Black.ttf */; };
+		D9B5DE2FD5EF4B7984B0D9C6 /* Arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03F6B384EE1A4C0D99CB9F26 /* Arial.ttf */; };
+		40C8462CD49E401DB49D26C8 /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E0102D6BC3044DFB94BCDC8 /* Comic Sans MS.ttf */; };
+		81991D6118A54F70B512F396 /* Courier New.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85822DB944824CEAB666A544 /* Courier New.ttf */; };
+		DDDD0BACECD140289A64E47F /* Georgia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A706D46D5DE14236867F9474 /* Georgia.ttf */; };
+		946995DCC02E4DAD8DE2A3E8 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6509F44E3D074EA783F4F202 /* Microsoft Sans Serif.ttf */; };
+		4F022615D1F64BCDA8FD752E /* Skia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 668136D578844ED98F1C0A57 /* Skia.ttf */; };
+		E84DD84C54A644FC8F13283A /* Times New Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CEE1CC3A9434CF5B09F812F /* Times New Roman.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +135,15 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = ../node_modules/react-native/React/React.xcodeproj; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = ../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = ../node_modules/react-native/Libraries/Text/RCTText.xcodeproj; sourceTree = "<group>"; };
+		E7CF45E54B774A99B9CE23A0 /* Andale Mono.ttf */ = {isa = PBXFileReference; name = "Andale Mono.ttf"; path = "../node_modules/native-base/Fonts/Andale Mono.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CC051C466DF04298984311FA /* Arial Black.ttf */ = {isa = PBXFileReference; name = "Arial Black.ttf"; path = "../node_modules/native-base/Fonts/Arial Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		03F6B384EE1A4C0D99CB9F26 /* Arial.ttf */ = {isa = PBXFileReference; name = "Arial.ttf"; path = "../node_modules/native-base/Fonts/Arial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4E0102D6BC3044DFB94BCDC8 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; name = "Comic Sans MS.ttf"; path = "../node_modules/native-base/Fonts/Comic Sans MS.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		85822DB944824CEAB666A544 /* Courier New.ttf */ = {isa = PBXFileReference; name = "Courier New.ttf"; path = "../node_modules/native-base/Fonts/Courier New.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A706D46D5DE14236867F9474 /* Georgia.ttf */ = {isa = PBXFileReference; name = "Georgia.ttf"; path = "../node_modules/native-base/Fonts/Georgia.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6509F44E3D074EA783F4F202 /* Microsoft Sans Serif.ttf */ = {isa = PBXFileReference; name = "Microsoft Sans Serif.ttf"; path = "../node_modules/native-base/Fonts/Microsoft Sans Serif.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		668136D578844ED98F1C0A57 /* Skia.ttf */ = {isa = PBXFileReference; name = "Skia.ttf"; path = "../node_modules/native-base/Fonts/Skia.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2CEE1CC3A9434CF5B09F812F /* Times New Roman.ttf */ = {isa = PBXFileReference; name = "Times New Roman.ttf"; path = "../node_modules/native-base/Fonts/Times New Roman.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +310,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* BeaconNavigatorTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				91BDC4EC165547A5B04EBF06 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -305,6 +323,23 @@
 				00E356EE1AD99517003FC87E /* BeaconNavigatorTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		91BDC4EC165547A5B04EBF06 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E7CF45E54B774A99B9CE23A0 /* Andale Mono.ttf */,
+				CC051C466DF04298984311FA /* Arial Black.ttf */,
+				03F6B384EE1A4C0D99CB9F26 /* Arial.ttf */,
+				4E0102D6BC3044DFB94BCDC8 /* Comic Sans MS.ttf */,
+				85822DB944824CEAB666A544 /* Courier New.ttf */,
+				A706D46D5DE14236867F9474 /* Georgia.ttf */,
+				6509F44E3D074EA783F4F202 /* Microsoft Sans Serif.ttf */,
+				668136D578844ED98F1C0A57 /* Skia.ttf */,
+				2CEE1CC3A9434CF5B09F812F /* Times New Roman.ttf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,7 +387,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -509,6 +544,15 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				BC529A536BDC4ABB83044795 /* Andale Mono.ttf in Resources */,
+				5394845D285C47B68601FE17 /* Arial Black.ttf in Resources */,
+				D9B5DE2FD5EF4B7984B0D9C6 /* Arial.ttf in Resources */,
+				40C8462CD49E401DB49D26C8 /* Comic Sans MS.ttf in Resources */,
+				81991D6118A54F70B512F396 /* Courier New.ttf in Resources */,
+				DDDD0BACECD140289A64E47F /* Georgia.ttf in Resources */,
+				946995DCC02E4DAD8DE2A3E8 /* Microsoft Sans Serif.ttf in Resources */,
+				4F022615D1F64BCDA8FD752E /* Skia.ttf in Resources */,
+				E84DD84C54A644FC8F13283A /* Times New Roman.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,11 +658,11 @@
 				);
 				INFOPLIST_FILE = "BeaconNavigator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-        OTHER_LDFLAGS = (
+				OTHER_LDFLAGS = (
 					"$(inherited)",
-          "-ObjC",
-          "-lc++",
-        );
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_NAME = BeaconNavigator;
 			};
 			name = Debug;
@@ -634,11 +678,11 @@
 				);
 				INFOPLIST_FILE = "BeaconNavigator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-        OTHER_LDFLAGS = (
+				OTHER_LDFLAGS = (
 					"$(inherited)",
-          "-ObjC",
-          "-lc++",
-        );
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_NAME = BeaconNavigator;
 			};
 			name = Release;
