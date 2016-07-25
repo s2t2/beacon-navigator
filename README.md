@@ -23,3 +23,9 @@ Ensure an android emulator is running or an android device is connected, then pa
 ```` sh
 react-native run-android
 ````
+
+To view the results of `console.log()` statements for debugging purposes, run:
+
+```` sh
+react-native log-android
+````

@@ -9,13 +9,7 @@ const BeaconNavigator = React.createClass({
 
   getInitialState: function(){
     console.log("GETTING INITIAL STATE")
-    return {
-      nearbyBeacons:[
-        {uuid:"A", name:"Beacon Un"},
-        {uuid:"B", name:"Beacon Deux"},
-        {uuid:"C", name:"Beacon Trios"},
-      ]
-    }
+    return {nearbyBeacons:[]}
   },
 
   componentWillMount: function(){
@@ -27,10 +21,10 @@ const BeaconNavigator = React.createClass({
   },
 
   componentDidMount: function(){
+    var component = this;
     console.log("COMPONENT DID MOUNT")
     this.beaconsDidRange = DeviceEventEmitter.addListener("beaconsDidRange", function(data){
-      console.log(data)
-      console.log(data.beacons)
+      component.prettyLogBeacons(data.beacons)
       //this.setState({nearbyBeacons: data.beacons});
     });
   },
@@ -56,8 +50,8 @@ const BeaconNavigator = React.createClass({
             {
               beacons.map(function(beacon){
                 return (
-                  <ListItem key={beacon.uuid} itemDivider={component.isEvenNumber(beacons.indexOf(beacon))}>
-                    <Text>{beacon.name}</Text>
+                  <ListItem key={component.beaconId(beacon)} itemDivider={component.isEvenNumber(beacons.indexOf(beacon))}>
+                    <Text>{component.beaconId(beacon)} ({beacon.distance.toFixed(2)} meters)</Text>
                   </ListItem>
                 );
               })
@@ -75,8 +69,31 @@ const BeaconNavigator = React.createClass({
   },
 
   isEvenNumber: function(listItemIndex){
-    console.log("INDEX", listItemIndex, "SHOULD BE DEVIDED?", (listItemIndex % 2) == 0)
+    console.log("INDEX", listItemIndex, "SHOULD BE DIVIDED?", (listItemIndex % 2) == 0)
     return (listItemIndex % 2) == 0
+  },
+
+  beaconId: function(beacon){
+    return beacon.uuid + "..." + beacon.major + "..." + beacon.minor
+  },
+
+  prettyLogBeacons: function(beacons){
+    var component = this;
+    var near = beacons.filter(function(b){  return b["proximity"] == "near" })
+    var far = beacons.filter(function(b){  return b["proximity"] == "far" })
+    var whereverYouAre = beacons.filter(function(b){  return b["proximity"] == "immediate" })
+    //console.log(
+    //  "NOW:", Date.now(),
+    //  //"ALL:", beacons.length, beacons.map(function(b){  return component.beaconId(b)  }),
+    //  "LOC :", whereverYouAre.map(function(b){  return component.beaconId(b)  }),
+    //  "NEAR:", near.map(function(b){  return component.beaconId(b)  }),
+    //  "FAR :", far.map(function(b){  return component.beaconId(b)  })
+    //)
+    console.log("------------------")
+    console.log("NOW:", Date.now())
+    console.log("LOC:", whereverYouAre.map(function(b){  return component.beaconId(b)  }))
+    console.log("NEAR:", near.map(function(b){  return component.beaconId(b)  }))
+    console.log("FAR :", far.map(function(b){  return component.beaconId(b)  }))
   },
 
   alertTitle: "Alert Title",
