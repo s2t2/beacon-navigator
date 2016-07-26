@@ -1,6 +1,6 @@
 import React from 'react';
-import {AppRegistry, Text} from 'react-native';
-import {Container, Header, Footer, Content, Button, Icon, List, ListItem} from 'native-base';
+import {Text} from 'react-native';
+import {Container, Header, Content, Button, Icon, List, ListItem} from 'native-base';
 
 import {styles} from "../lib/styles";
 
@@ -13,22 +13,23 @@ const BeaconsIndexPage = React.createClass({
     return (
       <Container style={styles.container}>
         <Header style={styles.header}>
+          <Button transparent onPress={this.goBack}>
+            <Icon name="md-arrow-back" style={styles.backIcon}/>
+          </Button>
+
           <Text style={styles.title}>Nearby Places of Interest ({this.props.nearbyBeacons.length})</Text>
         </Header>
+
         <Content>
-          <Button transparent onPress={this.goBack}>
-            <Icon name="ios-arrow-round-back" />
-          </Button>
+          <Text>todo: list</Text>
         </Content>
       </Container>
     );
   },
 
   goBack: function(){
-    //this.props.navigator.pop()
     this.props.navigator.push({name: 'Home', type:"Back"})
   }
-
 });
 
 module.exports = BeaconsIndexPage;

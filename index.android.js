@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppRegistry, Navigator, View, Text, TouchableHighlight} from 'react-native';
+import {AppRegistry, Navigator} from 'react-native';
 
 import HomePage from "./components/HomePage"
 import BeaconsIndexPage from "./components/BeaconsIndexPage"

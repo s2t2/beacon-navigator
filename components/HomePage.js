@@ -1,16 +1,12 @@
 import React from 'react';
-import {AppRegistry, Text} from 'react-native';
-import {Container, Header, Footer, Content, Button, Icon, List, ListItem, Spinner} from 'native-base';
+import {Text} from 'react-native';
+import {Container, Header, Footer, Content, Button, Icon, Spinner} from 'native-base';
 
 import {styles} from "../lib/styles";
 import {beaconsDidRangeResult} from "../lib/beacons_did_range_example_result";
 
 const HomePage = React.createClass({
-  getInitialState: function(){
-    console.log("HOME GETTING INITIAL STATE")
-    return {nearbyBeacons:[], displaySpinner:false}
-  },
-
+  getInitialState: function(){  return {displaySpinner:false}  },
   componentWillMount: function(){  console.log("HOME WILL MOUNT")  },
   componentDidMount: function(){  console.log("HOME DID MOUNT")  },
   componentWillUnmount: function(){  console.log("HOME WILL UNMOUNT")  },
@@ -52,7 +48,7 @@ const HomePage = React.createClass({
           nearbyBeacons: beaconsDidRangeResult
         }
       })
-    }, 5000);
+    }, 1000);
   }
 
 });
