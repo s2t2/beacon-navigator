@@ -6,20 +6,20 @@ import {styles} from "../lib/styles";
 
 const BeaconsIndexPage = React.createClass({
   componentWillMount: function(){  console.log("BEACONS INDEX WILL MOUNT")  },
-
   componentDidMount: function(){  console.log("BEACONS INDEX DID MOUNT")  },
-
   componentWillUnmount: function(){  console.log("BEACONS INDEX WILL UNMOUNT")  },
 
   render: function(){
     return (
       <Container style={styles.container}>
         <Header style={styles.header}>
-          <Button transparent>
+          <Text style={styles.title}>Nearby Places of Interest ({this.props.beaconCount})</Text>
+        </Header>
+        <Content>
+          <Button transparent onPress={  this.props.navigator.pop()  }>
             <Icon name="ios-arrow-round-back" />
           </Button>
-          <Text style={styles.title}>Nearby Places of Interest</Text>
-        </Header>
+        </Content>
       </Container>
     );
   }

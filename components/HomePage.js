@@ -2,8 +2,8 @@ import React from 'react';
 import {AppRegistry, Text} from 'react-native';
 import {Container, Header, Footer, Content, Button, Icon, List, ListItem, Spinner} from 'native-base';
 
-import {styles} from "./lib/styles";
-import {beaconsDidRangeResult} from "./lib/beacons_did_range_example_result";
+import {styles} from "../lib/styles";
+import {beaconsDidRangeResult} from "../lib/beacons_did_range_example_result";
 
 const HomePage = React.createClass({
   getInitialState: function(){
@@ -12,9 +12,7 @@ const HomePage = React.createClass({
   },
 
   componentWillMount: function(){  console.log("HOME WILL MOUNT")  },
-
   componentDidMount: function(){  console.log("HOME DID MOUNT")  },
-
   componentWillUnmount: function(){  console.log("HOME WILL UNMOUNT")  },
 
   render: function(){
@@ -40,14 +38,22 @@ const HomePage = React.createClass({
   },
 
   handleButtonPress: function(){
-    this.setState({displaySpinner: true})
-    var component = this;
-    setTimeout(function(){
-      component.setState({
-        displaySpinner: false,
-        nearbyBeacons: beaconsDidRangeResult
-      })
-    }, 5000);
+    //this.setState({displaySpinner: true})
+    //var component = this;
+    //setTimeout(function(){
+    //  component.setState({
+    //    displaySpinner: false,
+    //    nearbyBeacons: beaconsDidRangeResult
+    //  })
+    //}, 5000);
+
+    this.props.navigator.push({
+      name: 'BeaconsIndex',
+      passProps: {
+        beaconCount: 5
+      }
+    })
+
   }
 
 });
