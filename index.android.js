@@ -86,7 +86,11 @@ const BeaconNavigator = React.createClass({
 
   handleButtonPress: function(){
     this.setState({displaySpinner: true})
-    //TODO: kick-off 15-second beacon-detection, then this.setState({displaySpinner: false, nearbyBeacons:[...]}) when that finishes
+
+    var component = this;
+    setTimeout(function(){
+      component.setState({displaySpinner: false})
+    }, 5000);
   },
 
 
@@ -208,7 +212,7 @@ const BeaconNavigator = React.createClass({
   emitBeaconData: function(data){
     //this.logBeacons(data.beacons)
     //this.logProximityOfKnownBeacons(data.beacons)
-    this.logProximityOfKnownBeaconsToCSV(data.beacons)
+    //this.logProximityOfKnownBeaconsToCSV(data.beacons)
     //this.setState({nearbyBeacons: data.beacons});
   },
 
@@ -266,15 +270,15 @@ const BeaconNavigator = React.createClass({
     )
   },
 
-  ////
-  //// ALERT METHODS
-  ////
-//
-  //alertTitle: "Alert Title",
-  //alertMessage: "This is an Alert Message",
-  //triggerAlert: function(){
-  //  return Alert.alert(this.alertTitle, this.alertMessage)
-  //}
+  //
+  // ALERT METHODS
+  //
+
+  alertTitle: "Alert Title",
+  alertMessage: "This is an Alert Message",
+  triggerAlert: function(){
+    return Alert.alert(this.alertTitle, this.alertMessage)
+  }
 });
 
 AppRegistry.registerComponent('BeaconNavigator', function(){
