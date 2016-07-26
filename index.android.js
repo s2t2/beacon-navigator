@@ -5,6 +5,7 @@ import {Container, Header, Footer, Content, Button, Icon, List, ListItem, Spinne
 
 import {styles} from "./lib/styles";
 import {lookupTable} from "./lib/lookup_table";
+import {beaconsDidRangeResult} from "./lib/beacons_did_range_example_result";
 
 const BeaconNavigator = React.createClass({
 
@@ -89,7 +90,10 @@ const BeaconNavigator = React.createClass({
 
     var component = this;
     setTimeout(function(){
-      component.setState({displaySpinner: false})
+      component.setState({
+        displaySpinner: false,
+        nearbyBeacons: beaconsDidRangeResult
+      })
     }, 5000);
   },
 
