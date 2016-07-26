@@ -86,9 +86,33 @@ const BeaconNavigator = React.createClass({
     return beacon.uuid + "..." + beacon.major + "..." + beacon.minor
   },
 
-  beaconProximity: function(beacon){
+  beaconPrettyProximity: function(beacon){
     if (beacon) {
       return beacon.proximity.toLocaleUpperCase() + " @ " + beacon.distance.toFixed(2) + " meters (" + beacon.rssi + " strength)"
+    } else {
+      return "N/A"
+    }
+  },
+
+  beaconProximity: function(beacon){
+    if (beacon) {
+      return beacon.proximity.toLocaleUpperCase()
+    } else {
+      return "N/A"
+    }
+  },
+
+  beaconDistance: function(beacon){
+    if (beacon) {
+      return beacon.distance.toFixed(2)
+    } else {
+      return "N/A"
+    }
+  },
+
+  beaconStrength: function(beacon){
+    if (beacon) {
+      return beacon.rssi
     } else {
       return "N/A"
     }
@@ -103,7 +127,8 @@ const BeaconNavigator = React.createClass({
   //
   emitBeaconData: function(data){
     //this.logBeacons(data.beacons)
-    this.logProximityOfKnownBeacons(data.beacons)
+    //this.logProximityOfKnownBeacons(data.beacons)
+    this.logProximityOfKnownBeaconsToCSV(data.beacons)
     //this.setState({nearbyBeacons: data.beacons});
   },
 
@@ -132,9 +157,33 @@ const BeaconNavigator = React.createClass({
     var green = beacons.filter(function(b){  return component.beaconId(b) == component.beaconId(lookupTable["GREEN"]) })[0]
     console.log("------------------")
     console.log("NOW:", Date.now())
-    console.log("PURPLE:", component.beaconProximity(purple))
-    console.log("BLUE:", component.beaconProximity(blue))
-    console.log("GREEN:", component.beaconProximity(green))
+    console.log("PURPLE:", component.beaconPrettyProximity(purple))
+    console.log("BLUE:", component.beaconPrettyProximity(blue))
+    console.log("GREEN:", component.beaconPrettyProximity(green))
+  },
+
+  //
+  // Use this function to track the proximity of known beacons over time
+  // ... to CSV format with pipe-delimited values
+  // ... using the column names: "timestamp | purple_prox | purple_dist | purple_strength | blue_prox | blue_dist | blue_strength | green_prox | green_dist | green_strength"
+  //
+  logProximityOfKnownBeaconsToCSV: function(beacons){
+    var component = this;
+    var purple = beacons.filter(function(b){  return component.beaconId(b) == component.beaconId(lookupTable["PURPLE"]) })[0]
+    var blue = beacons.filter(function(b){  return component.beaconId(b) == component.beaconId(lookupTable["BLUE"]) })[0]
+    var green = beacons.filter(function(b){  return component.beaconId(b) == component.beaconId(lookupTable["GREEN"]) })[0]
+    console.log(
+      Date.now() +
+      " | " + component.beaconProximity(purple) +
+      " | " + component.beaconDistance(purple) +
+      " | " + component.beaconStrength(purple) +
+      " | " + component.beaconProximity(blue) +
+      " | " + component.beaconDistance(blue) +
+      " | " + component.beaconStrength(blue) +
+      " | " + component.beaconProximity(green) +
+      " | " + component.beaconDistance(green) +
+      " | " + component.beaconStrength(green)
+    )
   },
 
   //
