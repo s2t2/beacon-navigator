@@ -38,22 +38,21 @@ const HomePage = React.createClass({
   },
 
   handleButtonPress: function(){
-    //this.setState({displaySpinner: true})
-    //var component = this;
-    //setTimeout(function(){
-    //  component.setState({
-    //    displaySpinner: false,
-    //    nearbyBeacons: beaconsDidRangeResult
-    //  })
-    //}, 5000);
+    this.setState({displaySpinner: true})
 
-    this.props.navigator.push({
-      name: 'BeaconsIndex',
-      passProps: {
-        beaconCount: 5
-      }
-    })
-
+    var component = this;
+    setTimeout(function(){
+      //component.setState({
+      //  displaySpinner: false,
+      //  nearbyBeacons: beaconsDidRangeResult
+      //})
+      component.props.navigator.push({
+        name: 'BeaconsIndex',
+        passProps: {
+          nearbyBeacons: beaconsDidRangeResult
+        }
+      })
+    }, 5000);
   }
 
 });

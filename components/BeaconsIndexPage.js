@@ -13,7 +13,7 @@ const BeaconsIndexPage = React.createClass({
     return (
       <Container style={styles.container}>
         <Header style={styles.header}>
-          <Text style={styles.title}>Nearby Places of Interest ({this.props.beaconCount})</Text>
+          <Text style={styles.title}>Nearby Places of Interest ({this.props.nearbyBeacons.length})</Text>
         </Header>
         <Content>
           <Button transparent onPress={this.goBack}>
