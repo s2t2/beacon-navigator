@@ -16,12 +16,17 @@ const BeaconsIndexPage = React.createClass({
           <Text style={styles.title}>Nearby Places of Interest ({this.props.beaconCount})</Text>
         </Header>
         <Content>
-          <Button transparent onPress={  this.props.navigator.pop()  }>
+          <Button transparent onPress={this.goBack}>
             <Icon name="ios-arrow-round-back" />
           </Button>
         </Content>
       </Container>
     );
+  },
+
+  goBack: function(){
+    //this.props.navigator.pop()
+    this.props.navigator.push({name: 'Home'})
   }
 
 });
