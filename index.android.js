@@ -1,6 +1,6 @@
 import React from 'react';
 import {AppRegistry, Text, Alert, DeviceEventEmitter} from 'react-native';
-import {Container, Header, Footer, Content, Button, Icon, List, ListItem} from 'native-base';
+import {Container, Header, Footer, Content, Button, Icon, List, ListItem, Spinner} from 'native-base';
 //import Beacons from 'react-native-beacons-android';
 
 import {styles} from "./lib/styles";
@@ -14,7 +14,10 @@ const BeaconNavigator = React.createClass({
 
   getInitialState: function(){
     console.log("GETTING INITIAL STATE")
-    return {nearbyBeacons:[]}
+    return {
+      nearbyBeacons:[],
+      displaySpinner:false
+    }
   },
 
   componentWillMount: function(){
@@ -51,6 +54,9 @@ const BeaconNavigator = React.createClass({
 
         <Content style={styles.content}>
           <Text style={styles.text}>Tap the button to detect nearby points of interest based on proximity to Bluetooth beacons.</Text>
+
+          {this.state.displaySpinner ? <Spinner color="#428bca" size="large"/> : null}
+
           <List>
             {
               beacons.map(function(beacon){
@@ -65,7 +71,7 @@ const BeaconNavigator = React.createClass({
         </Content>
 
         <Footer style={styles.footer}>
-          <Button style={styles.button} onPress={this.triggerAlert}>
+          <Button style={styles.button} onPress={this.handleButtonPress}>
             <Icon name="ios-radio-outline" />
           </Button>
         </Footer>
@@ -77,6 +83,80 @@ const BeaconNavigator = React.createClass({
     console.log("INDEX", listItemIndex, "SHOULD BE DIVIDED?", (listItemIndex % 2) == 0)
     return (listItemIndex % 2) == 0
   },
+
+  handleButtonPress: function(){
+    this.setState({displaySpinner: true})
+    //TODO: kick-off 15-second beacon-detection, then this.setState({displaySpinner: false, nearbyBeacons:[...]}) when that finishes
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //
   // BEACON INSTANCE METHODS
@@ -186,15 +266,15 @@ const BeaconNavigator = React.createClass({
     )
   },
 
-  //
-  // ALERT METHODS
-  //
-
-  alertTitle: "Alert Title",
-  alertMessage: "This is an Alert Message",
-  triggerAlert: function(){
-    return Alert.alert(this.alertTitle, this.alertMessage)
-  }
+  ////
+  //// ALERT METHODS
+  ////
+//
+  //alertTitle: "Alert Title",
+  //alertMessage: "This is an Alert Message",
+  //triggerAlert: function(){
+  //  return Alert.alert(this.alertTitle, this.alertMessage)
+  //}
 });
 
 AppRegistry.registerComponent('BeaconNavigator', function(){
