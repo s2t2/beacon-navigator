@@ -10,6 +10,9 @@ const BeaconsIndexPage = React.createClass({
   componentWillUnmount: function(){  console.log("BEACONS INDEX WILL UNMOUNT")  },
 
   render: function(){
+    var beacons = this.props.nearbyBeacons;
+    var component = this;
+
     return (
       <Container style={styles.container}>
         <Header style={styles.header}>
@@ -17,11 +20,21 @@ const BeaconsIndexPage = React.createClass({
             <Icon name="md-arrow-back" style={styles.backIcon}/>
           </Button>
 
-          <Text style={styles.title}>Nearby Places of Interest ({this.props.nearbyBeacons.length})</Text>
+          <Text style={styles.title}>Nearby Places of Interest ({beacons.length})</Text>
         </Header>
 
         <Content>
-          <Text>todo: list</Text>
+          <List>
+            {
+              beacons.map(function(beacon){
+                return (
+                  <ListItem key={component.beaconId(beacon)} itemDivider={component.isEvenNumber(beacons.indexOf(beacon))}>
+                    <Text>{component.beaconPrettyProximity(beacon)}</Text>
+                  </ListItem>
+                );
+              })
+            }
+          </List>
         </Content>
       </Container>
     );
@@ -29,7 +42,25 @@ const BeaconsIndexPage = React.createClass({
 
   goBack: function(){
     this.props.navigator.push({name: 'Home', type:"Back"})
+  },
+
+  isEvenNumber: function(listItemIndex){
+    console.log("INDEX", listItemIndex, "SHOULD BE DIVIDED?", (listItemIndex % 2) == 0)
+    return (listItemIndex % 2) == 0
+  },
+
+  beaconId: function(beacon){
+    return beacon.uuid + "..." + beacon.major + "..." + beacon.minor
+  },
+
+  beaconPrettyProximity: function(beacon){
+    if (beacon) {
+      return beacon.proximity.toLocaleUpperCase() + " @ " + beacon.distance.toFixed(2) + " meters (" + beacon.rssi + " strength)"
+    } else {
+      return "N/A"
+    }
   }
+
 });
 
 module.exports = BeaconsIndexPage;
