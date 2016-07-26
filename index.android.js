@@ -10,17 +10,32 @@ const App = React.createClass({
   componentWillUnmount: function(){  console.log("APP WILL UNMOUNT")  },
 
   renderScene(route, navigator) {
-    if(route.name == 'Home') {
-      return <HomePage navigator={navigator} {...route.passProps}  />
+    switch (route.name) {
+      case 'Home':
+        return <HomePage navigator={navigator} {...route.passProps}  />
+        break;
+      case 'BeaconsIndex':
+        return <BeaconsIndexPage navigator={navigator} {...route.passProps}  />
+        break;
     }
-    if(route.name == 'BeaconsIndex') {
-      return <BeaconsIndexPage navigator={navigator} {...route.passProps}  />
+  },
+
+  configureScene(route, routeStack){
+    if(route.type == 'Back') {
+      return Navigator.SceneConfigs.FloatFromLeft;
+    } else {
+      return Navigator.SceneConfigs.PushFromRight;
     }
   },
 
   render: function(){
     return (
-      <Navigator style={{ flex:1 }} initialRoute={{ name: 'Home' }} renderScene={ this.renderScene } />
+      <Navigator
+        style={{ flex:1 }}
+        initialRoute={{ name: 'Home' }}
+        renderScene={ this.renderScene }
+        configureScene={ this.configureScene }
+      />
     );
   }
 });

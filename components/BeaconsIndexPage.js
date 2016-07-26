@@ -26,7 +26,7 @@ const BeaconsIndexPage = React.createClass({
 
   goBack: function(){
     //this.props.navigator.pop()
-    this.props.navigator.push({name: 'Home'})
+    this.props.navigator.push({name: 'Home', type:"Back"})
   }
 
 });
