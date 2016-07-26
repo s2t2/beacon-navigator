@@ -1,59 +1,71 @@
 import React from 'react';
-import {AppRegistry, Text, Alert, DeviceEventEmitter} from 'react-native';
-import {Container, Header, Footer, Content, Button, Icon, List, ListItem, Spinner} from 'native-base';
+import {AppRegistry, Navigator, View, Text, TouchableHighlight} from 'react-native';
 
-import {styles} from "./lib/styles";
-import {beaconsDidRangeResult} from "./lib/beacons_did_range_example_result";
-
+//import HomePage from "./components/HomePage"
 //import BeaconsIndexPage from "./components/BeaconsIndexPage"
 
-const BeaconNavigator = React.createClass({
-  getInitialState: function(){
-    console.log("INDEX GETTING INITIAL STATE")
-    return {nearbyBeacons:[], displaySpinner:false}
+const App = React.createClass({
+  componentWillMount: function(){  console.log("APP WILL MOUNT")  },
+  componentDidMount: function(){  console.log("APP DID MOUNT")  },
+  componentWillUnmount: function(){  console.log("APP WILL UNMOUNT")  },
+
+  renderScene(route, navigator) {
+    if(route.name == 'Home') {
+    	return <Home navigator={navigator} {...route.passProps}  />
+    }
+  	if(route.name == 'Main') {
+    	return <Main navigator={navigator} {...route.passProps}  />
+    }
   },
-
-  componentWillMount: function(){  console.log("INDEX WILL MOUNT")  },
-
-  componentDidMount: function(){  console.log("INDEX DID MOUNT")  },
-
-  componentWillUnmount: function(){  console.log("INDEX WILL UNMOUNT")  },
 
   render: function(){
     return (
-      <Container style={styles.container}>
-        <Header style={styles.header}>
-          <Text style={styles.title}>Beacon Navigator</Text>
-        </Header>
-
-        <Content style={styles.content}>
-          <Text style={styles.text}>Tap the button to detect nearby points of interest based on proximity to Bluetooth beacons.</Text>
-
-          {this.state.displaySpinner ? <Spinner color="#428bca" size="large"/> : null}
-        </Content>
-
-        <Footer style={styles.footer}>
-          <Button style={styles.button} onPress={this.handleButtonPress}>
-            <Icon name="ios-radio-outline" />
-          </Button>
-        </Footer>
-      </Container>
+      <Navigator style={{ flex:1 }} initialRoute={{ name: 'Main' }} renderScene={ this.renderScene } />
     );
+  }
+});
+
+var Main = React.createClass({
+  componentWillMount: function(){  console.log("MAIN WILL MOUNT")  },
+  componentDidMount: function(){  console.log("MAIN DID MOUNT")  },
+  componentWillUnmount: function(){  console.log("MAIN WILL UNMOUNT")  },
+
+  _navigate(name) {
+  	this.props.navigator.push({
+    	name: 'Home',
+      passProps: {
+      	name: name
+      }
+    })
   },
 
-  handleButtonPress: function(){
-    this.setState({displaySpinner: true})
-    var component = this;
-    setTimeout(function(){
-      component.setState({
-        displaySpinner: false,
-        nearbyBeacons: beaconsDidRangeResult
-      })
-    }, 5000);
+	render() {
+    return (
+    	<View>
+      	<Text>Hello from Main</Text>
+ 				<TouchableHighlight onPress={ () => this._navigate('YOYOYOYOYO') }>
+      		<Text>GO GO GO</Text>
+      	</TouchableHighlight>
+      </View>
+    )
   }
+})
 
-});
+var Home = React.createClass({
+  componentWillMount: function(){  console.log("HOME WILL MOUNT")  },
+  componentDidMount: function(){  console.log("HOME DID MOUNT")  },
+  componentWillUnmount: function(){  console.log("HOME WILL UNMOUNT")  },
 
-AppRegistry.registerComponent('BeaconNavigator', function(){
-  return BeaconNavigator;
-});
+	render() {
+    return (
+    	<View>
+      	<Text>Hello from { this.props.name }</Text>
+ 				<TouchableHighlight onPress={ () => this.props.navigator.pop() }>
+      		<Text>GO Back</Text>
+      	</TouchableHighlight>
+      </View>
+    )
+  }
+})
+
+AppRegistry.registerComponent('BeaconNavigator', function(){  return App;  });
