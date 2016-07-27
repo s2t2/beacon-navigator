@@ -9,6 +9,9 @@ const HomePage = React.createClass({
   getInitialState: function(){  return {displaySpinner:false}  },
   componentWillMount: function(){  console.log("HOME WILL MOUNT")  },
   componentDidMount: function(){  console.log("HOME DID MOUNT")  },
+  componentWillReceiveProps: function(nextProps){  console.log("HOME WILL RECEIVE PROPS", nextProps)  },
+  //componentWillUpdate: function(nextProps, nextState){  console.log("HOME WILL RECEIVE PROPS", nextProps, nextState)  },
+  //componentDidUpdate: function(prevProps, prevState){  console.log("HOME DID UPDATE", prevProps, prevState)  },
   componentWillUnmount: function(){  console.log("HOME WILL UNMOUNT")  },
 
   render: function(){

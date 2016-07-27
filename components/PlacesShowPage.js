@@ -7,6 +7,9 @@ import {styles} from "../lib/styles";
 const PlacesShowPage = React.createClass({
   componentWillMount: function(){  console.log("PLACES SHOW WILL MOUNT")  },
   componentDidMount: function(){  console.log("PLACES SHOW DID MOUNT")  },
+  componentWillReceiveProps: function(nextProps){  console.log("PLACES SHOW WILL RECEIVE PROPS", nextProps)  },
+  //componentWillUpdate: function(nextProps, nextState){  console.log("PLACES SHOW WILL RECEIVE PROPS", nextProps, nextState)  },
+  //componentDidUpdate: function(prevProps, prevState){  console.log("PLACES SHOW DID UPDATE", prevProps, prevState)  },
   componentWillUnmount: function(){  console.log("PLACES SHOW WILL UNMOUNT")  },
 
   render: function(){
