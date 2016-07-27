@@ -23,7 +23,6 @@ const HomePage = React.createClass({
 
         <Content style={styles.content}>
           <Text style={styles.text}>Tap the button to detect nearby points of interest based on proximity to Bluetooth beacons.</Text>
-
           {this.state.displaySpinner ? <Spinner color="#428bca" size="large"/> : null}
         </Content>
 
@@ -41,19 +40,15 @@ const HomePage = React.createClass({
 
     var component = this;
     setTimeout(function(){
-      //component.setState({
-      //  displaySpinner: false,
-      //  nearbyBeacons: beaconsDidRangeResult
-      //})
+      component.setState({displaySpinner: false}) // technically unnecessary beacause the new page will be loaded, but included just in case
       component.props.navigator.push({
-        name: 'Places',
+        name: 'Beacons',
         passProps: {
-          nearbyBeacons: beaconsDidRangeResult
+          nearbyBeacons: beaconsDidRangeResult // TODO: pass real detection results
         }
       })
     }, 1000);
   }
-
 });
 
 module.exports = HomePage;

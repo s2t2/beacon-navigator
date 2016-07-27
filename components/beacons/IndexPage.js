@@ -2,15 +2,15 @@ import React from 'react';
 import {Text} from 'react-native';
 import {Container, Header, Content, Button, Icon, List, ListItem} from 'native-base';
 
-import {styles} from "../lib/styles";
+import {styles} from "../../lib/styles";
 
-const PlacesIndexPage = React.createClass({
-  componentWillMount: function(){  console.log("PLACES INDEX WILL MOUNT")  },
-  componentDidMount: function(){  console.log("PLACES INDEX DID MOUNT")  },
-  componentWillReceiveProps: function(nextProps){  console.log("PLACES INDEX WILL RECEIVE PROPS")  },
-  componentWillUpdate: function(nextProps, nextState){  console.log("PLACES INDEX WILL UPDATE")  },
-  componentDidUpdate: function(prevProps, prevState){  console.log("PLACES INDEX DID UPDATE")  },
-  componentWillUnmount: function(){  console.log("PLACES INDEX WILL UNMOUNT")  },
+const IndexPage = React.createClass({
+  componentWillMount: function(){  console.log("INDEX WILL MOUNT")  },
+  componentDidMount: function(){  console.log("INDEX DID MOUNT")  },
+  componentWillReceiveProps: function(nextProps){  console.log("INDEX WILL RECEIVE PROPS")  },
+  componentWillUpdate: function(nextProps, nextState){  console.log("INDEX WILL UPDATE")  },
+  componentDidUpdate: function(prevProps, prevState){  console.log("INDEX DID UPDATE")  },
+  componentWillUnmount: function(){  console.log("INDEX WILL UNMOUNT")  },
 
   render: function(){
     var beacons = this.props.nearbyBeacons;
@@ -22,7 +22,7 @@ const PlacesIndexPage = React.createClass({
           <Button transparent onPress={this.goBack}>
             <Icon name="md-arrow-back" style={styles.backIcon}/>
           </Button>
-          <Text style={styles.title}>Nearby Places of Interest ({beacons.length})</Text>
+          <Text style={styles.title}>Nearby Beacons ({beacons.length})</Text>
         </Header>
 
         <Content>
@@ -44,25 +44,12 @@ const PlacesIndexPage = React.createClass({
     );
   },
 
-  goBack: function(){
-    this.props.navigator.push({
-      name: 'Home',
-      type: "Back"
-    })
-  },
-
-  goShow: function(beacon, beacons){
-    this.props.navigator.push({
-      name: 'Place',
-      passProps:{
-        indexBeacons: beacons, // need to pass this to the show page so the show page can pass them back to the index page
-        showBeacon: beacon,
-      }
-    })
-  },
+  //
+  // DISPLAY FORMATTING FUNCTIONS
+  //
 
   isEvenNumber: function(listItemIndex){
-    console.log("INDEX", listItemIndex, "SHOULD BE DIVIDED?", (listItemIndex % 2) == 0)
+    //console.log("INDEX", listItemIndex, "SHOULD BE DIVIDED?", (listItemIndex % 2) == 0)
     return (listItemIndex % 2) == 0
   },
 
@@ -76,8 +63,28 @@ const PlacesIndexPage = React.createClass({
     } else {
       return "N/A"
     }
-  }
+  },
 
+  //
+  // NAVIGATION FUNCTIONS
+  //
+
+  goBack: function(){
+    this.props.navigator.push({
+      name: 'Home',
+      type: "Back"
+    })
+  },
+
+  goShow: function(beacon, beacons){
+    this.props.navigator.push({
+      name: 'Beacon',
+      passProps:{
+        indexBeacons: beacons, // need to pass this to the show page so the show page can pass them back to the index page
+        showBeacon: beacon,
+      }
+    })
+  }
 });
 
-module.exports = PlacesIndexPage;
+module.exports = IndexPage;

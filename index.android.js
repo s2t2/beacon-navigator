@@ -1,13 +1,17 @@
 import React from 'react';
 import {AppRegistry, Navigator} from 'react-native';
 
-import HomePage from "./components/HomePage"
-import PlacesIndexPage from "./components/PlacesIndexPage"
-import PlacesShowPage from "./components/PlacesShowPage"
+import HomePage from "./components/HomePage";
+import BeaconsIndexPage from "./components/beacons/IndexPage";
+import BeaconsShowPage from "./components/beacons/ShowPage";
 
+// This component controls navigation between other components.
 const App = React.createClass({
   componentWillMount: function(){  console.log("APP WILL MOUNT")  },
   componentDidMount: function(){  console.log("APP DID MOUNT")  },
+  componentWillReceiveProps: function(nextProps){  console.log("APP WILL RECEIVE PROPS")  },
+  componentWillUpdate: function(nextProps, nextState){  console.log("APP WILL UPDATE")  },
+  componentDidUpdate: function(prevProps, prevState){  console.log("APP DID UPDATE")  },
   componentWillUnmount: function(){  console.log("APP WILL UNMOUNT")  },
 
   renderScene(route, navigator) {
@@ -15,11 +19,11 @@ const App = React.createClass({
       case 'Home':
         return <HomePage navigator={navigator} {...route.passProps}  />
         break;
-      case 'Places':
-        return <PlacesIndexPage navigator={navigator} {...route.passProps}  />
+      case 'Beacons':
+        return <BeaconsIndexPage navigator={navigator} {...route.passProps}  />
         break;
-      case 'Place':
-        return <PlacesShowPage navigator={navigator} {...route.passProps}  />
+      case 'Beacon':
+        return <BeaconsShowPage navigator={navigator} {...route.passProps}  />
         break;
     }
   },
@@ -36,7 +40,7 @@ const App = React.createClass({
     return (
       <Navigator
         style={{ flex:1 }}
-        initialRoute={{ name: 'Home' }}
+        initialRoute={{ name: 'Home' }} // Specify which component should show up when the app is loaded.
         renderScene={ this.renderScene }
         configureScene={ this.configureScene }
       />

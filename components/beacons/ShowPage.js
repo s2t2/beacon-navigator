@@ -2,15 +2,15 @@ import React from 'react';
 import {Text} from 'react-native';
 import {Container, Header, Content, Button, Icon} from 'native-base';
 
-import {styles} from "../lib/styles";
+import {styles} from "../../lib/styles";
 
-const PlacesShowPage = React.createClass({
-  componentWillMount: function(){  console.log("PLACES SHOW WILL MOUNT")  },
-  componentDidMount: function(){  console.log("PLACES SHOW DID MOUNT")  },
-  componentWillReceiveProps: function(nextProps){  console.log("PLACES SHOW WILL RECEIVE PROPS")  },
-  componentWillUpdate: function(nextProps, nextState){  console.log("PLACES SHOW WILL UPDATE")  },
-  componentDidUpdate: function(prevProps, prevState){  console.log("PLACES SHOW DID UPDATE")  },
-  componentWillUnmount: function(){  console.log("PLACES SHOW WILL UNMOUNT")  },
+const ShowPage = React.createClass({
+  componentWillMount: function(){  console.log("SHOW WILL MOUNT")  },
+  componentDidMount: function(){  console.log("SHOW DID MOUNT")  },
+  componentWillReceiveProps: function(nextProps){  console.log("SHOW WILL RECEIVE PROPS")  },
+  componentWillUpdate: function(nextProps, nextState){  console.log("SHOW WILL UPDATE")  },
+  componentDidUpdate: function(prevProps, prevState){  console.log("SHOW DID UPDATE")  },
+  componentWillUnmount: function(){  console.log("SHOW WILL UNMOUNT")  },
 
   render: function(){
     var beacon = this.props.showBeacon;
@@ -33,9 +33,13 @@ const PlacesShowPage = React.createClass({
     );
   },
 
+  //
+  // NAVIGATION FUNCTION
+  //
+
   goBack: function(beacons){
     this.props.navigator.push({
-      name: "Places",
+      name: "Beacons",
       type: "Back",
       passProps:{
         nearbyBeacons: beacons
@@ -44,4 +48,4 @@ const PlacesShowPage = React.createClass({
   }
 });
 
-module.exports = PlacesShowPage;
+module.exports = ShowPage;
