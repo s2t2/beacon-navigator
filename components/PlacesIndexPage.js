@@ -7,6 +7,9 @@ import {styles} from "../lib/styles";
 const PlacesIndexPage = React.createClass({
   componentWillMount: function(){  console.log("PLACES INDEX WILL MOUNT")  },
   componentDidMount: function(){  console.log("PLACES INDEX DID MOUNT")  },
+  componentWillReceiveProps: function(nextProps){  console.log("PLACES INDEX WILL RECEIVE PROPS")  },
+  componentWillUpdate: function(nextProps, nextState){  console.log("PLACES INDEX WILL UPDATE")  },
+  componentDidUpdate: function(prevProps, prevState){  console.log("PLACES INDEX DID UPDATE")  },
   componentWillUnmount: function(){  console.log("PLACES INDEX WILL UNMOUNT")  },
 
   render: function(){

@@ -2,6 +2,14 @@
 
 See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit history.
 
+## JavaScript
+
+  + http://stackoverflow.com/questions/11901074/javascript-call-a-function-after-specific-time-period
+
+## React
+
+  + https://facebook.github.io/react/docs/component-specs.html
+
 ## React Native
 
   + https://facebook.github.io/react-native/
@@ -55,7 +63,7 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
 
   + https://facebook.github.io/react-native/docs/debugging.html
 
-### Navigation
+### Navigation and Routing
 
   + https://facebook.github.io/react-native/docs/navigator.html
   + https://medium.com/@dabit3/react-native-navigator-navigating-like-a-pro-in-react-native-3cb1b6dc1e30#.8ipo29wg6
@@ -114,16 +122,3 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
   + https://github.com/mmazzarolo/react-native-beacons-android
   + https://github.com/MacKentoch/reactNativeBeaconExample/blob/master/index.android.js
   + https://medium.com/@erwan.datin/mmazzarolohow-to-play-with-ibeacons-in-a-react-native-application-5cef754b2edc#.cjqg5o5uj
-
-
-
-
-
-
-
-
-
-
-## JavaScript
-
-  + http://stackoverflow.com/questions/11901074/javascript-call-a-function-after-specific-time-period
