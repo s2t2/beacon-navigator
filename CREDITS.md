@@ -54,6 +54,7 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
   + https://facebook.github.io/react-native/docs/text.html#style
   + https://facebook.github.io/react-native/docs/flexbox.html
   + http://stackoverflow.com/questions/19691530/valid-values-for-androidfontfamily-and-what-they-map-to
+  + https://github.com/GeekyAnts/NativeBase/issues/83
 
 #### Colors
 

@@ -28,11 +28,15 @@ const IndexPage = React.createClass({
 
         <Content style={styles.content}>
           <List>
+            <ListItem key="list-header" itemDivider style={styles.listHeader}>
+              <Text style={styles.listHeaderTitle}>NEARBY BEACONS ({beacons.length})</Text>
+            </ListItem>
             {
               beacons.map(function(beacon){
                 return (
-                  <ListItem key={beaconId(beacon)} itemDivider={component.isEvenNumber(beacons.indexOf(beacon))}>
+                  <ListItem key={beaconId(beacon)}>
                     <Button transparent onPress={function(){  component.goShow(beacon, beacons)  } /* need this wrapper function to prevent inner function from being executed on render */}>
+                      <Icon name={beacon.details.iconName}></Icon>
                       <Text>{beacon.details.displayName}</Text>
                     </Button>
                   </ListItem>
@@ -45,18 +49,10 @@ const IndexPage = React.createClass({
     );
   },
 
-  //
-  // DISPLAY FORMATTING FUNCTIONS
-  //
-
-  isEvenNumber: function(listItemIndex){
-    //console.log("INDEX", listItemIndex, "SHOULD BE DIVIDED?", (listItemIndex % 2) == 0)
-    return (listItemIndex % 2) == 0
-  },
-
-  //
-  // NAVIGATION FUNCTIONS
-  //
+  //isEvenNumber: function(listItemIndex){
+  //  //console.log("INDEX", listItemIndex, "SHOULD BE DIVIDED?", (listItemIndex % 2) == 0)
+  //  return (listItemIndex % 2) == 0
+  //},
 
   goBack: function(){
     this.props.navigator.push({

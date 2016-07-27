@@ -1,8 +1,9 @@
 import React from 'react';
 import {Text} from 'react-native';
-import {Container, Header, Content, Button, Icon} from 'native-base';
+import {Container, Header, Content, Button, Icon, Card, CardItem} from 'native-base';
 
 import {styles} from "../../lib/styles";
+import {beaconPrettyDistance} from "../../lib/beacons_helper";
 
 const ShowPage = React.createClass({
   componentWillMount: function(){  console.log("SHOW WILL MOUNT")  },
@@ -27,16 +28,21 @@ const ShowPage = React.createClass({
         </Header>
 
         <Content style={styles.content}>
-          <Text>{beacon.details.displayName}</Text>
-          <Text style={styles.text}>{beacon.uuid}</Text>
+          <Card>
+            <CardItem header>
+              <Text>{beacon.details.displayName}</Text>
+            </CardItem>
+            <CardItem>
+              <Text>{beaconPrettyDistance(beacon)}</Text>
+            </CardItem>
+            <CardItem>
+              <Text>{beacon.details.description}</Text>
+            </CardItem>
+          </Card>
         </Content>
       </Container>
     );
   },
-
-  //
-  // NAVIGATION FUNCTION
-  //
 
   goBack: function(beacons){
     this.props.navigator.push({

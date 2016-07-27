@@ -54,10 +54,6 @@ const HomePage = React.createClass({
     }, 1000);
   },
 
-  //
-  // NAVIGATION
-  //
-
   goIndex(beacons){
     this.props.navigator.push({
       name: 'Beacons',
