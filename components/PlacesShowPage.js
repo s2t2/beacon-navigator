@@ -13,28 +13,32 @@ const PlacesShowPage = React.createClass({
   componentWillUnmount: function(){  console.log("PLACES SHOW WILL UNMOUNT")  },
 
   render: function(){
+    var beacon = this.props.showBeacon;
+    var beacons = this.props.indexBeacons;
+    var component = this;
+
     return (
       <Container style={styles.container}>
         <Header style={styles.header}>
-          <Button transparent onPress={this.goBack}>
+          <Button transparent onPress={function(){  component.goBack(beacons)  } /* need this wrapper function to prevent inner function from being executed on render */}>
             <Icon name="md-arrow-back" style={styles.backIcon}/>
           </Button>
           <Text style={styles.title}>Place Name</Text>
         </Header>
 
         <Content>
-          <Text>Place information here</Text>
+          <Text>{beacon.uuid}</Text>
         </Content>
       </Container>
     );
   },
 
-  goBack: function(){
+  goBack: function(beacons){
     this.props.navigator.push({
-      name: 'Places',
-      type:"Back",
+      name: "Places",
+      type: "Back",
       passProps:{
-        nearbyBeacons:[]
+        nearbyBeacons: beacons
       }
     })
   }

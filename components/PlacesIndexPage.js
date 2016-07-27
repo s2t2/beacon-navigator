@@ -31,7 +31,7 @@ const PlacesIndexPage = React.createClass({
               beacons.map(function(beacon){
                 return (
                   <ListItem key={component.beaconId(beacon)} itemDivider={component.isEvenNumber(beacons.indexOf(beacon))}>
-                    <Button transparent onPress={component.goShow}>
+                    <Button transparent onPress={function(){  component.goShow(beacon, beacons)  } /* need this wrapper function to prevent inner function from being executed on render */}>
                       <Text>{component.beaconPrettyProximity(beacon)}</Text>
                     </Button>
                   </ListItem>
@@ -51,12 +51,12 @@ const PlacesIndexPage = React.createClass({
     })
   },
 
-  goShow: function(){
+  goShow: function(beacon, beacons){
     this.props.navigator.push({
       name: 'Place',
       passProps:{
-        nearbyBeacons:[],
-        beacon: {}
+        indexBeacons: beacons, // need to pass this to the show page so the show page can pass them back to the index page
+        showBeacon: beacon,
       }
     })
   },
