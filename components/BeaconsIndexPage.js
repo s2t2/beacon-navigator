@@ -19,7 +19,6 @@ const BeaconsIndexPage = React.createClass({
           <Button transparent onPress={this.goBack}>
             <Icon name="md-arrow-back" style={styles.backIcon}/>
           </Button>
-
           <Text style={styles.title}>Nearby Places of Interest ({beacons.length})</Text>
         </Header>
 
@@ -29,7 +28,9 @@ const BeaconsIndexPage = React.createClass({
               beacons.map(function(beacon){
                 return (
                   <ListItem key={component.beaconId(beacon)} itemDivider={component.isEvenNumber(beacons.indexOf(beacon))}>
-                    <Text>{component.beaconPrettyProximity(beacon)}</Text>
+                    <Button transparent onPress={component.goShow}>
+                      <Text>{component.beaconPrettyProximity(beacon)}</Text>
+                    </Button>
                   </ListItem>
                 );
               })
@@ -41,7 +42,20 @@ const BeaconsIndexPage = React.createClass({
   },
 
   goBack: function(){
-    this.props.navigator.push({name: 'Home', type:"Back"})
+    this.props.navigator.push({
+      name: 'Home',
+      type: "Back"
+    })
+  },
+
+  goShow: function(){
+    this.props.navigator.push({
+      name: 'Beacon',
+      passProps:{
+        nearbyBeacons:[],
+        beacon: {}
+      }
+    })
   },
 
   isEvenNumber: function(listItemIndex){

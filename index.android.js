@@ -3,6 +3,7 @@ import {AppRegistry, Navigator} from 'react-native';
 
 import HomePage from "./components/HomePage"
 import BeaconsIndexPage from "./components/BeaconsIndexPage"
+import BeaconsShowPage from "./components/BeaconsShowPage"
 
 const App = React.createClass({
   componentWillMount: function(){  console.log("APP WILL MOUNT")  },
@@ -14,8 +15,11 @@ const App = React.createClass({
       case 'Home':
         return <HomePage navigator={navigator} {...route.passProps}  />
         break;
-      case 'BeaconsIndex':
+      case 'Beacons':
         return <BeaconsIndexPage navigator={navigator} {...route.passProps}  />
+        break;
+      case 'Beacon':
+        return <BeaconsShowPage navigator={navigator} {...route.passProps}  />
         break;
     }
   },

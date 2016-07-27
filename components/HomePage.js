@@ -43,7 +43,7 @@ const HomePage = React.createClass({
       //  nearbyBeacons: beaconsDidRangeResult
       //})
       component.props.navigator.push({
-        name: 'BeaconsIndex',
+        name: 'Beacons',
         passProps: {
           nearbyBeacons: beaconsDidRangeResult
         }
