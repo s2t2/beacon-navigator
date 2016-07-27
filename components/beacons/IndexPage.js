@@ -3,6 +3,7 @@ import {Text} from 'react-native';
 import {Container, Header, Content, Button, Icon, List, ListItem} from 'native-base';
 
 import {styles} from "../../lib/styles";
+import {beaconId} from "../../lib/beacons_helper";
 
 const IndexPage = React.createClass({
   componentWillMount: function(){  console.log("INDEX WILL MOUNT")  },
@@ -25,14 +26,14 @@ const IndexPage = React.createClass({
           <Text style={styles.title}>Nearby Beacons ({beacons.length})</Text>
         </Header>
 
-        <Content>
+        <Content style={styles.content}>
           <List>
             {
               beacons.map(function(beacon){
                 return (
-                  <ListItem key={component.beaconId(beacon)} itemDivider={component.isEvenNumber(beacons.indexOf(beacon))}>
+                  <ListItem key={beaconId(beacon)} itemDivider={component.isEvenNumber(beacons.indexOf(beacon))}>
                     <Button transparent onPress={function(){  component.goShow(beacon, beacons)  } /* need this wrapper function to prevent inner function from being executed on render */}>
-                      <Text>{component.beaconPrettyProximity(beacon)}</Text>
+                      <Text>{beacon.details.displayName}</Text>
                     </Button>
                   </ListItem>
                 );
@@ -51,18 +52,6 @@ const IndexPage = React.createClass({
   isEvenNumber: function(listItemIndex){
     //console.log("INDEX", listItemIndex, "SHOULD BE DIVIDED?", (listItemIndex % 2) == 0)
     return (listItemIndex % 2) == 0
-  },
-
-  beaconId: function(beacon){
-    return beacon.uuid + "..." + beacon.major + "..." + beacon.minor
-  },
-
-  beaconPrettyProximity: function(beacon){
-    if (beacon) {
-      return beacon.proximity.toLocaleUpperCase() + " @ " + beacon.distance.toFixed(2) + " meters (" + beacon.rssi + " strength)"
-    } else {
-      return "N/A"
-    }
   },
 
   //

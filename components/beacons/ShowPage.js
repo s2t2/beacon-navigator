@@ -23,11 +23,12 @@ const ShowPage = React.createClass({
           <Button transparent onPress={function(){  component.goBack(beacons)  } /* need this wrapper function to prevent inner function from being executed on render */}>
             <Icon name="md-arrow-back" style={styles.backIcon}/>
           </Button>
-          <Text style={styles.title}>Place Name</Text>
+          <Text style={styles.title}>{beacon.details.displayName}</Text>
         </Header>
 
-        <Content>
-          <Text>{beacon.uuid}</Text>
+        <Content style={styles.content}>
+          <Text>{beacon.details.displayName}</Text>
+          <Text style={styles.text}>{beacon.uuid}</Text>
         </Content>
       </Container>
     );

@@ -4,6 +4,7 @@ import {Container, Header, Footer, Content, Button, Icon, Spinner} from 'native-
 
 import {styles} from "../lib/styles";
 import {beaconsDidRangeResult} from "../lib/beacons_did_range_example_result";
+import {beaconId, lookupBeaconDetails} from "../lib/beacons_helper";
 
 const HomePage = React.createClass({
   getInitialState: function(){  return {displaySpinner:false}  },
@@ -39,10 +40,11 @@ const HomePage = React.createClass({
     this.setState({displaySpinner: true})
     var component = this;
     setTimeout(function(){
-      var result = beaconsDidRangeResult;
-      var beacons = []; //result; // todo: look-up contextual information
+      var results = beaconsDidRangeResult; //TODO: stop mocking and get real response
+      var beacons = lookupBeaconDetails(results);
       if (beacons.length > 0) {
         console.log("DETECTED SOME BEACONS");
+        component.setState({displaySpinner: false});
         component.goIndex(beacons);
       } else {
         console.log("DETECTED ZERO BEACONS");
@@ -56,11 +58,11 @@ const HomePage = React.createClass({
   // NAVIGATION
   //
 
-  goIndex(beaconsDidRangeResult){
+  goIndex(beacons){
     this.props.navigator.push({
       name: 'Beacons',
       passProps: {
-        nearbyBeacons: beaconsDidRangeResult
+        nearbyBeacons: beacons
       }
     })
   }
