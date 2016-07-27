@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, Alert} from 'react-native';
 import {Container, Header, Footer, Content, Button, Icon, Spinner} from 'native-base';
 
 import {styles} from "../lib/styles";
@@ -37,17 +37,32 @@ const HomePage = React.createClass({
 
   handleButtonPress: function(){
     this.setState({displaySpinner: true})
-
     var component = this;
     setTimeout(function(){
-      component.setState({displaySpinner: false}) // technically unnecessary beacause the new page will be loaded, but included just in case
-      component.props.navigator.push({
-        name: 'Beacons',
-        passProps: {
-          nearbyBeacons: beaconsDidRangeResult // TODO: pass real detection results
-        }
-      })
+      var result = beaconsDidRangeResult;
+      var beacons = []; //result; // todo: look-up contextual information
+      if (beacons.length > 0) {
+        console.log("DETECTED SOME BEACONS");
+        component.goIndex(beacons);
+      } else {
+        console.log("DETECTED ZERO BEACONS");
+        component.setState({displaySpinner: false});
+        return Alert.alert("No Beacons Nearby", "Hey, it looks like there aren't any Bluetooth beacons around you right now. Why don't you try again after moving to a different location?");
+      };
     }, 1000);
+  },
+
+  //
+  // NAVIGATION
+  //
+
+  goIndex(beaconsDidRangeResult){
+    this.props.navigator.push({
+      name: 'Beacons',
+      passProps: {
+        nearbyBeacons: beaconsDidRangeResult
+      }
+    })
   }
 });
 
