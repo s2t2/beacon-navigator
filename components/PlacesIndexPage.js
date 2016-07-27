@@ -4,10 +4,10 @@ import {Container, Header, Content, Button, Icon, List, ListItem} from 'native-b
 
 import {styles} from "../lib/styles";
 
-const BeaconsIndexPage = React.createClass({
-  componentWillMount: function(){  console.log("BEACONS INDEX WILL MOUNT")  },
-  componentDidMount: function(){  console.log("BEACONS INDEX DID MOUNT")  },
-  componentWillUnmount: function(){  console.log("BEACONS INDEX WILL UNMOUNT")  },
+const PlacesIndexPage = React.createClass({
+  componentWillMount: function(){  console.log("PLACES INDEX WILL MOUNT")  },
+  componentDidMount: function(){  console.log("PLACES INDEX DID MOUNT")  },
+  componentWillUnmount: function(){  console.log("PLACES INDEX WILL UNMOUNT")  },
 
   render: function(){
     var beacons = this.props.nearbyBeacons;
@@ -50,7 +50,7 @@ const BeaconsIndexPage = React.createClass({
 
   goShow: function(){
     this.props.navigator.push({
-      name: 'Beacon',
+      name: 'Place',
       passProps:{
         nearbyBeacons:[],
         beacon: {}
@@ -77,4 +77,4 @@ const BeaconsIndexPage = React.createClass({
 
 });
 
-module.exports = BeaconsIndexPage;
+module.exports = PlacesIndexPage;

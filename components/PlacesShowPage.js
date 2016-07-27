@@ -4,10 +4,10 @@ import {Container, Header, Content, Button, Icon} from 'native-base';
 
 import {styles} from "../lib/styles";
 
-const BeaconsIndexPage = React.createClass({
-  componentWillMount: function(){  console.log("BEACONS SHOW WILL MOUNT")  },
-  componentDidMount: function(){  console.log("BEACONS SHOW DID MOUNT")  },
-  componentWillUnmount: function(){  console.log("BEACONS SHOW WILL UNMOUNT")  },
+const PlacesShowPage = React.createClass({
+  componentWillMount: function(){  console.log("PLACES SHOW WILL MOUNT")  },
+  componentDidMount: function(){  console.log("PLACES SHOW DID MOUNT")  },
+  componentWillUnmount: function(){  console.log("PLACES SHOW WILL UNMOUNT")  },
 
   render: function(){
     return (
@@ -28,7 +28,7 @@ const BeaconsIndexPage = React.createClass({
 
   goBack: function(){
     this.props.navigator.push({
-      name: 'Beacons',
+      name: 'Places',
       type:"Back",
       passProps:{
         nearbyBeacons:[]
@@ -37,4 +37,4 @@ const BeaconsIndexPage = React.createClass({
   }
 });
 
-module.exports = BeaconsIndexPage;
+module.exports = PlacesShowPage;

@@ -2,8 +2,8 @@ import React from 'react';
 import {AppRegistry, Navigator} from 'react-native';
 
 import HomePage from "./components/HomePage"
-import BeaconsIndexPage from "./components/BeaconsIndexPage"
-import BeaconsShowPage from "./components/BeaconsShowPage"
+import PlacesIndexPage from "./components/PlacesIndexPage"
+import PlacesShowPage from "./components/PlacesShowPage"
 
 const App = React.createClass({
   componentWillMount: function(){  console.log("APP WILL MOUNT")  },
@@ -15,11 +15,11 @@ const App = React.createClass({
       case 'Home':
         return <HomePage navigator={navigator} {...route.passProps}  />
         break;
-      case 'Beacons':
-        return <BeaconsIndexPage navigator={navigator} {...route.passProps}  />
+      case 'Places':
+        return <PlacesIndexPage navigator={navigator} {...route.passProps}  />
         break;
-      case 'Beacon':
-        return <BeaconsShowPage navigator={navigator} {...route.passProps}  />
+      case 'Place':
+        return <PlacesShowPage navigator={navigator} {...route.passProps}  />
         break;
     }
   },
