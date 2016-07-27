@@ -1,19 +1,38 @@
 import React from 'react';
 import {Text, Alert} from 'react-native';
 import {Container, Header, Footer, Content, Button, Icon, Spinner} from 'native-base';
+import Beacons from 'react-native-beacons-android';
 
 import {styles} from "../lib/styles";
 import {beaconsDidRangeResult} from "../lib/beacons_did_range_example_result";
 import {beaconId, lookupBeaconDetails} from "../lib/beacons_helper";
 
 const HomePage = React.createClass({
-  getInitialState: function(){  return {displaySpinner:false}  },
-  componentWillMount: function(){  console.log("HOME WILL MOUNT")  },
-  componentDidMount: function(){  console.log("HOME DID MOUNT")  },
+  getInitialState: function(){
+    return {displaySpinner:false, detectionResults:[]};
+  },
+
+  componentWillMount: function(){
+    console.log("HOME WILL MOUNT");
+    Beacons.detectIBeacons();
+    Beacons.startRangingBeaconsInRegion('REGION1')
+      .then(function(){  console.log("Beacon Ranging OK")  })
+      .catch(function(error){  console.log("Beacon Ranging ERR", err)  })
+  },
+
+  componentDidMount: function(){
+    console.log("HOME DID MOUNT");
+    this.beaconsDidRange = DeviceEventEmitter.addListener("beaconsDidRange", this.emitBeaconData);
+  },
+
   componentWillReceiveProps: function(nextProps){  console.log("HOME WILL RECEIVE PROPS")  },
   componentWillUpdate: function(nextProps, nextState){  console.log("HOME WILL UPDATE")  },
   componentDidUpdate: function(prevProps, prevState){  console.log("HOME DID UPDATE")  },
-  componentWillUnmount: function(){  console.log("HOME WILL UNMOUNT")  },
+
+  componentWillUnmount: function(){
+    console.log("HOME WILL UNMOUNT");
+    this.beaconsDidRange = null;
+  },
 
   render: function(){
     return (
@@ -52,6 +71,17 @@ const HomePage = React.createClass({
         return Alert.alert("No Beacons Nearby", "Hey, it looks like there aren't any Bluetooth beacons around you right now. Why don't you try again after moving to a different location?");
       };
     }, 1000);
+  },
+
+  //
+  // This function controls what happens with the results of beacon-detection efforts.
+  //
+  // @param [Object] data A complete beaconsDidRangeResult. See data/mocks/beacons-did-range/ for examples.
+  emitBeaconData: function(data){
+    //logBeacons(data.beacons)
+    //logProximityOfKnownBeacons(data.beacons)
+    logProximityOfKnownBeaconsToCSV(data.beacons)
+    //this.setState({beaconDetectionResults: data.beacons});
   },
 
   goIndex(beacons){
