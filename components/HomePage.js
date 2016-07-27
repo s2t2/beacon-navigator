@@ -9,7 +9,7 @@ import {beaconId, lookupBeaconDetails, logBeacons, logBeaconsToCSV, logKnownBeac
 
 const HomePage = React.createClass({
   getInitialState: function(){
-    return {displaySpinner:false, detectionResults:[]};
+    return {displaySpinner:false, detections:[]};
   },
 
   componentWillMount: function(){
@@ -80,8 +80,15 @@ const HomePage = React.createClass({
     //logBeacons(data.beacons);
     //logBeaconsToCSV(data.beacons);
     //logKnownBeacons(data.beacons);
-    logKnownBeaconsToCSV(data.beacons);
-    //this.setState({beaconDetectionResults: data.beacons});
+    //logKnownBeaconsToCSV(data.beacons);
+
+    console.log("---------------------")
+    console.log("STATE CONTAINS APPROX. " + this.state.detections.length + " DETECTIONS")
+    if (this.state.detections.length >= 10) {
+      this.setState({detections:[]}) // prevent this collection from growing out of hand, perhaps preventing memory management issues/crashes.
+    } else {
+      this.setState({detections: this.state.detections.concat(data.beacons)}); // append new detection results into state.
+    };
   },
 
   goIndex(beacons){
