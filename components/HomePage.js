@@ -1,11 +1,11 @@
 import React from 'react';
-import {Text, Alert} from 'react-native';
+import {Text, Alert, DeviceEventEmitter} from 'react-native';
 import {Container, Header, Footer, Content, Button, Icon, Spinner} from 'native-base';
 import Beacons from 'react-native-beacons-android';
 
 import {styles} from "../lib/styles";
 import {beaconsDidRangeResult} from "../lib/beacons_did_range_example_result";
-import {beaconId, lookupBeaconDetails} from "../lib/beacons_helper";
+import {beaconId, lookupBeaconDetails, logBeacons, logBeaconsToCSV, logKnownBeacons, logKnownBeaconsToCSV} from "../lib/beacons_helper";
 
 const HomePage = React.createClass({
   getInitialState: function(){
@@ -73,14 +73,14 @@ const HomePage = React.createClass({
     }, 1000);
   },
 
-  //
   // This function controls what happens with the results of beacon-detection efforts.
-  //
   // @param [Object] data A complete beaconsDidRangeResult. See data/mocks/beacons-did-range/ for examples.
   emitBeaconData: function(data){
-    //logBeacons(data.beacons)
-    //logProximityOfKnownBeacons(data.beacons)
-    logProximityOfKnownBeaconsToCSV(data.beacons)
+    //console.log(data.beacons);
+    //logBeacons(data.beacons);
+    //logBeaconsToCSV(data.beacons);
+    //logKnownBeacons(data.beacons);
+    logKnownBeaconsToCSV(data.beacons);
     //this.setState({beaconDetectionResults: data.beacons});
   },
 
