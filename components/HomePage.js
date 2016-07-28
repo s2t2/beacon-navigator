@@ -9,7 +9,7 @@ import {beaconId, mergeBeaconDetails, logBeacons, logBeaconsToCSV, logKnownBeaco
 
 const HomePage = React.createClass({
   getInitialState: function(){
-    return {displaySpinner:false, detectionAttemptsCount:0, detections:[]};
+    return {displaySpinner:false, collectDetectionResults: false, detectionAttemptsCount:0, detections:[]};
   },
 
   componentWillMount: function(){
@@ -30,8 +30,8 @@ const HomePage = React.createClass({
   componentDidUpdate: function(prevProps, prevState){  console.log("HOME DID UPDATE")  },
 
   componentWillUnmount: function(){
-    console.log("HOME WILL UNMOUNT !!!");
-    this.stopDetectingBeacons()
+    console.log("HOME WILL UNMOUNT");
+    this.stopDetectingBeacons();
   },
 
   render: function(){
@@ -56,21 +56,7 @@ const HomePage = React.createClass({
   },
 
   handleButtonPress: function(){
-    this.setState({displaySpinner: true})
-    var component = this;
-    setTimeout(function(){
-      var results = beaconsDidRangeResult; //TODO: stop mocking and get real response
-      var beacons = mergeBeaconDetails(results);
-      if (beacons.length > 0) {
-        console.log("DETECTED SOME BEACONS");
-        component.setState({displaySpinner: false});
-        component.goIndex(beacons);
-      } else {
-        console.log("DETECTED ZERO BEACONS");
-        component.setState({displaySpinner: false});
-        return Alert.alert("No Beacons Nearby", "Hey, it looks like there aren't any Bluetooth beacons around you right now. Why don't you try again after moving to a different location?");
-      };
-    }, 1000);
+    this.setState({displaySpinner: true, collectDetectionResults: true});
   },
 
   // This function controls what happens with the results of beacon-detection efforts.
@@ -82,19 +68,23 @@ const HomePage = React.createClass({
     //logKnownBeacons(data.beacons);
     //logKnownBeaconsToCSV(data.beacons);
 
-    console.log("---------------------")
-    console.log("BEACON DETECTION ATTEMPT #" + this.state.detectionAttemptsCount);
-    if (this.state.detectionAttemptsCount < 10) {
-      this.setState({
-        detectionAttemptsCount: this.state.detectionAttemptsCount + 1,
-        detections: this.state.detections.concat(data.beacons)
-      });
-    } else {
-      var synthesizedResults = synthesizeDetections(this.state.detections);
-      var beacons = mergeBeaconDetailsWithSynthesizedResults(synthesizedResults);
-      this.setState({detectionAttemptsCount:0, detections:[]})
-      this.goIndex(beacons);
-    };
+    if(this.state.collectDetectionResults == true){
+      console.log("---------------------")
+      console.log("BEACON DETECTION ATTEMPT #" + this.state.detectionAttemptsCount);
+      if (this.state.detectionAttemptsCount < 10) {
+        this.setState({
+          detectionAttemptsCount: this.state.detectionAttemptsCount + 1,
+          detections: this.state.detections.concat(data.beacons)
+        });
+      } else {
+        var synthesizedResults = synthesizeDetections(this.state.detections);
+        var beacons = mergeBeaconDetailsWithSynthesizedResults(synthesizedResults);
+        //todo: alert if no beacons detected
+
+        this.setState({detectionAttemptsCount:0, detections:[], displaySpinner:false, collectDetectionResults: false})
+        this.goIndex(beacons);
+      };
+    }
   },
 
   stopDetectingBeacons(){
