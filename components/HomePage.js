@@ -3,8 +3,9 @@ import {Text, Alert, DeviceEventEmitter} from 'react-native';
 import {Container, Header, Footer, Content, Button, Icon, Spinner} from 'native-base';
 import Beacons from 'react-native-beacons-android';
 
-import {styles} from "../lib/styles";
 import {beaconId, mergeBeaconDetails, logBeacons, logBeaconsToCSV, logKnownBeacons, logKnownBeaconsToCSV, synthesizeDetections, mergeBeaconDetailsWithSynthesizedResults} from "../lib/beacons_helper";
+import {mockBluetooth} from "../lib/dev_helper"
+import {styles} from "../lib/styles";
 
 const HomePage = React.createClass({
   getInitialState: function(){
@@ -13,15 +14,19 @@ const HomePage = React.createClass({
 
   componentWillMount: function(){
     console.log("HOME WILL MOUNT");
-    Beacons.detectIBeacons();
-    Beacons.startRangingBeaconsInRegion('REGION1')
-      .then(function(){  console.log("Beacon Ranging OK")  })
-      .catch(function(error){  console.log("Beacon Ranging ERR", error)  });
+    if (!mockBluetooth) {
+      Beacons.detectIBeacons();
+      Beacons.startRangingBeaconsInRegion('REGION1')
+        .then(function(){  console.log("Beacon Ranging OK")  })
+        .catch(function(error){  console.log("Beacon Ranging ERR", error)  });
+    };
   },
 
   componentDidMount: function(){
     console.log("HOME DID MOUNT");
-    this.beaconsDidRange = DeviceEventEmitter.addListener("beaconsDidRange", this.emitBeaconData);
+    if (!mockBluetooth) {
+      this.beaconsDidRange = DeviceEventEmitter.addListener("beaconsDidRange", this.emitBeaconData);
+    };
   },
 
   componentWillReceiveProps: function(nextProps){  console.log("HOME WILL RECEIVE PROPS")  },
@@ -30,7 +35,9 @@ const HomePage = React.createClass({
 
   componentWillUnmount: function(){
     console.log("HOME WILL UNMOUNT");
-    this.stopDetectingBeacons();
+    if (!mockBluetooth) {
+      this.stopDetectingBeacons();
+    };
   },
 
   render: function(){
@@ -55,11 +62,15 @@ const HomePage = React.createClass({
   },
 
   handleButtonPress: function(){
-    this.setState({displaySpinner: true, collectDetectionResults: true});
+    if (!mockBluetooth) {
+      this.setState({displaySpinner: true, collectDetectionResults: true});
+    }else {
+      console.log("TODO: spin, wait, then navigate to BeaconShowPage, passing mockSynthesizedAndMergedBeacons as props");
+    };
   },
 
   // This function controls what happens with the results of beacon-detection efforts.
-  // @param [Object] data A complete beaconsDidRangeResult. See data/mocks/beacons-did-range/ for examples.
+  // @param [Object] data A complete beaconsDidRangeResult, the output of beaconsDidRange. See data/mocks/beacons-did-range/ for examples.
   emitBeaconData: function(data){
     //console.log(data.beacons);
     //logBeacons(data.beacons);
@@ -89,13 +100,15 @@ const HomePage = React.createClass({
   },
 
   stopDetectingBeacons(){
-    Beacons.stopRangingBeaconsInRegion('REGION1')
-      .then(function(){  console.log("Beacon Ranging Stopped OK")  })
-      .catch(function(error){  console.log("Beacon Ranging Stopped With ERR", error)  });
-    this.beaconsDidRange = null;
+    if (!mockBluetooth) {
+      Beacons.stopRangingBeaconsInRegion('REGION1')
+        .then(function(){  console.log("Beacon Ranging Stopped OK")  })
+        .catch(function(error){  console.log("Beacon Ranging Stopped With ERR", error)  });
+      this.beaconsDidRange = null;
+    };
   },
 
-  // @param [] synthesizedAndMergedBeacons The result of merging beacon details with synthesized detection results. See data/mocks/synthesized-and-merged-beacons/ for examples.
+  // @param [Array] synthesizedAndMergedBeacons The result of merging beacon details with synthesized detection results. See data/mocks/synthesized-and-merged-beacons/ for examples.
   goIndex(synthesizedAndMergedBeacons){
     console.log("SYNTHESIZED AND MERGED BEACONS", synthesizedAndMergedBeacons)
     this.props.navigator.resetTo({
