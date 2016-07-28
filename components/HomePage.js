@@ -45,7 +45,7 @@ const HomePage = React.createClass({
       <Container style={styles.container}>
         <Header style={styles.header}>
           <Button transparent onPress={this.handleSettingsButtonPress}>
-            <Icon name="ios-menu" style={styles.settingsIcon}/>
+            <Icon name="ios-menu" style={styles.headerIcon}/>
           </Button>
           <Title style={styles.title}>{ /* Beacon Navigator */ }</Title>
         </Header>

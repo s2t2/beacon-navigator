@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text} from 'react-native';
-import {Container, Header, Content, Button, Icon, Title} from 'native-base';
+import {Container, Header, Content, Button, Icon, Title, List, ListItem, Radio} from 'native-base';
 
 import {styles} from "../lib/styles";
 
@@ -17,13 +17,25 @@ const SettingsPage = React.createClass({
       <Container style={styles.container}>
         <Header style={styles.header}>
           <Button transparent onPress={this.handleSettingsButtonPress}>
-            <Icon name="ios-menu" style={styles.settingsIcon}/>
+            <Icon name="ios-home" style={styles.headerIcon}/>
           </Button>
-          <Title style={styles.title}>{ /* Beacon Navigator */ }</Title>
+          <Title></Title>
         </Header>
 
         <Content style={styles.content}>
-          <Text style={styles.text}>Select a mode.</Text>
+          <List>
+            <ListItem key="list-header" itemDivider style={styles.listHeader}>
+              <Text style={styles.listHeaderTitle}>Please choose a presentation mode ...</Text>
+            </ListItem>
+            <ListItem key="detection-mode">
+              <Radio selected={true} />
+              <Text>Detection Mode</Text>
+            </ListItem>
+            <ListItem key="walking-tour-mode">
+              <Radio selected={false} />
+              <Text>Walking Tour Mode</Text>
+            </ListItem>
+          </List>
         </Content>
       </Container>
     );

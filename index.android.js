@@ -42,7 +42,7 @@ const App = React.createClass({
         return Navigator.SceneConfigs.FloatFromLeft;
         break;
       case 'Menu':
-        return Navigator.SceneConfigs.VerticalUpSwipeJump;
+        return Navigator.SceneConfigs.FadeAndroid;
         break;
       default:
         return Navigator.SceneConfigs.PushFromRight;

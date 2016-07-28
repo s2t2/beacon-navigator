@@ -21,7 +21,7 @@ const IndexPage = React.createClass({
       <Container style={styles.container}>
         <Header style={styles.header}>
           <Button transparent onPress={this.goBack}>
-            <Icon name="md-arrow-back" style={styles.backIcon}/>
+            <Icon name="md-arrow-back" style={styles.headerIcon}/>
           </Button>
           <Text style={styles.title}>Nearby Beacons ({beacons.length})</Text>
         </Header>
