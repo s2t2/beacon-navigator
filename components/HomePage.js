@@ -4,7 +4,7 @@ import {Container, Header, Footer, Content, Button, Icon, Spinner} from 'native-
 import Beacons from 'react-native-beacons-android';
 
 import {beaconId, mergeBeaconDetails, logBeacons, logBeaconsToCSV, logKnownBeacons, logKnownBeaconsToCSV, synthesizeDetections, mergeBeaconDetailsWithSynthesizedResults} from "../lib/beacons_helper";
-import {mockBluetooth} from "../lib/dev_helper"
+import {mockBluetooth, mockSynthesizedAndMergedBeacons} from "../lib/dev_helper"
 import {styles} from "../lib/styles";
 
 const HomePage = React.createClass({
@@ -62,10 +62,12 @@ const HomePage = React.createClass({
   },
 
   handleButtonPress: function(){
-    if (!mockBluetooth) {
-      this.setState({displaySpinner: true, collectDetectionResults: true});
-    }else {
-      console.log("TODO: spin, wait, then navigate to BeaconShowPage, passing mockSynthesizedAndMergedBeacons as props");
+    this.setState({displaySpinner: true, collectDetectionResults: true});
+    if (mockBluetooth) {
+      var component = this;
+      setTimeout(function(){
+        component.navigateOrAlert(mockSynthesizedAndMergedBeacons);
+      }, 2000);
     };
   },
 
@@ -88,18 +90,13 @@ const HomePage = React.createClass({
         });
       } else {
         var synthesizedResults = synthesizeDetections(this.state.detections);
-        var beacons = mergeBeaconDetailsWithSynthesizedResults(synthesizedResults);
-        this.setState({detectionAttemptsCount:0, detections:[], displaySpinner:false, collectDetectionResults: false})
-        if (beacons.length > 0) {
-          this.goIndex(beacons);
-        } else {
-          return Alert.alert("No Beacons Nearby", "Hey, it looks like there aren't any Bluetooth beacons around you right now. Please move to a different location and try again.");
-        };
+        var synthesizedAndMergedBeacons = mergeBeaconDetailsWithSynthesizedResults(synthesizedResults);
+        this.navigateOrAlert(synthesizedAndMergedBeacons);
       };
     }
   },
 
-  stopDetectingBeacons(){
+  stopDetectingBeacons: function(){
     if (!mockBluetooth) {
       Beacons.stopRangingBeaconsInRegion('REGION1')
         .then(function(){  console.log("Beacon Ranging Stopped OK")  })
@@ -109,14 +106,23 @@ const HomePage = React.createClass({
   },
 
   // @param [Array] synthesizedAndMergedBeacons The result of merging beacon details with synthesized detection results. See data/mocks/synthesized-and-merged-beacons/ for examples.
-  goIndex(synthesizedAndMergedBeacons){
-    console.log("SYNTHESIZED AND MERGED BEACONS", synthesizedAndMergedBeacons)
+  navigateOrAlert: function(synthesizedAndMergedBeacons){
+    this.setState({detectionAttemptsCount:0, detections:[], displaySpinner:false, collectDetectionResults: false})
+    if (synthesizedAndMergedBeacons.length > 0) {
+      this.goIndex(synthesizedAndMergedBeacons);
+    } else {
+      return Alert.alert("No Beacons Nearby", "Hey, it looks like there aren't any Bluetooth beacons around you right now. Please move to a different location and try again.");
+    };
+  },
+
+  // @param [Array] synthesizedAndMergedBeacons The result of merging beacon details with synthesized detection results. See data/mocks/synthesized-and-merged-beacons/ for examples.
+  goIndex: function(synthesizedAndMergedBeacons){
     this.props.navigator.resetTo({
       name: 'Beacons',
       passProps: {
         nearbyBeacons: synthesizedAndMergedBeacons
       }
-    }) // unlike navigator.push, navigator.replace and navigator.resetTo both trigger ComponentWillUnmount, but also logs an error message: "Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the HomePage component."
+    }); // unlike navigator.push, navigator.replace and navigator.resetTo both trigger ComponentWillUnmount.
   }
 });
 
