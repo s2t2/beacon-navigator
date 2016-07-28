@@ -4,7 +4,6 @@ import {Container, Header, Footer, Content, Button, Icon, Spinner} from 'native-
 import Beacons from 'react-native-beacons-android';
 
 import {styles} from "../lib/styles";
-import {beaconsDidRangeResult} from "../lib/beacons_did_range_example_result";
 import {beaconId, mergeBeaconDetails, logBeacons, logBeaconsToCSV, logKnownBeacons, logKnownBeaconsToCSV, synthesizeDetections, mergeBeaconDetailsWithSynthesizedResults} from "../lib/beacons_helper";
 
 const HomePage = React.createClass({
