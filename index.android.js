@@ -5,7 +5,7 @@ import HomePage from "./components/HomePage";
 import SettingsPage from "./components/SettingsPage";
 import BeaconsIndexPage from "./components/beacons/IndexPage";
 import BeaconsShowPage from "./components/beacons/ShowPage";
-import ToursIndexPage from "./components/tours/IndexPage";
+import JourneysIndexPage from "./components/journeys/IndexPage";
 
 //import {presentationMode} from "./lib/dev_helper";
 //if (presentationMode == true) {
@@ -35,8 +35,8 @@ const App = React.createClass({
       case 'Settings':
         return <SettingsPage navigator={navigator} {...route.passProps}  />
         break;
-      case 'Tours':
-        return <ToursIndexPage navigator={navigator} {...route.passProps}  />
+      case 'Journeys':
+        return <JourneysIndexPage navigator={navigator} {...route.passProps}  />
         break;
     };
   },

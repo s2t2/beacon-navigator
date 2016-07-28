@@ -15,10 +15,10 @@ const SettingsPage = React.createClass({
           homeRouteName: "Home"
         },
         {
-          id: "walking-tour-mode",
-          name:"Walking Tour Mode",
+          id: "journey-mode",
+          name:"Journey Mode",
           selected: false,
-          homeRouteName: "Tours"
+          homeRouteName: "Journeys"
         }
       ]
     }
