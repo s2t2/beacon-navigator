@@ -2,6 +2,7 @@ import React from 'react';
 import {AppRegistry, Navigator} from 'react-native';
 
 import HomePage from "./components/HomePage";
+import SettingsPage from "./components/SettingsPage";
 import BeaconsIndexPage from "./components/beacons/IndexPage";
 import BeaconsShowPage from "./components/beacons/ShowPage";
 //import {presentationMode} from "./lib/dev_helper";
@@ -29,15 +30,23 @@ const App = React.createClass({
       case 'Beacon':
         return <BeaconsShowPage navigator={navigator} {...route.passProps}  />
         break;
-    }
+      case 'Settings':
+        return <SettingsPage navigator={navigator} {...route.passProps}  />
+        break;
+    };
   },
 
   configureScene(route, routeStack){
-    if(route.type == 'Back') {
-      return Navigator.SceneConfigs.FloatFromLeft;
-    } else {
-      return Navigator.SceneConfigs.PushFromRight;
-    }
+    switch (route.type) {
+      case 'Back':
+        return Navigator.SceneConfigs.FloatFromLeft;
+        break;
+      case 'Menu':
+        return Navigator.SceneConfigs.VerticalUpSwipeJump;
+        break;
+      default:
+        return Navigator.SceneConfigs.PushFromRight;
+      };
   },
 
   render: function(){

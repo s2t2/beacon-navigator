@@ -133,10 +133,9 @@ const HomePage = React.createClass({
   },
 
   goSettings: function(){
-    console.log("TODO: Navigate to settings menu")
-    //this.props.navigator.resetTo({
-    //  name: 'Settings'
-    //});
+    this.props.navigator.resetTo({
+      name: 'Settings'
+    });
   }
 });
 
