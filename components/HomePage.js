@@ -9,7 +9,7 @@ import {beaconId, mergeBeaconDetails, logBeacons, logBeaconsToCSV, logKnownBeaco
 
 const HomePage = React.createClass({
   getInitialState: function(){
-    return {displaySpinner:false, detections:[]};
+    return {displaySpinner:false, detectionAttemptsCount:0, detections:[]};
   },
 
   componentWillMount: function(){
@@ -30,7 +30,8 @@ const HomePage = React.createClass({
   componentDidUpdate: function(prevProps, prevState){  console.log("HOME DID UPDATE")  },
 
   componentWillUnmount: function(){
-    console.log("HOME WILL UNMOUNT");
+    console.log("HOME WILL UNMOUNT ?????????????????????");
+    //this.beaconsDidRange = null;
     this.stopDetectingBeacons();
   },
 
@@ -82,32 +83,27 @@ const HomePage = React.createClass({
     //logKnownBeacons(data.beacons);
     //logKnownBeaconsToCSV(data.beacons);
 
-    var detections = this.state.detections;
     console.log("---------------------")
-    console.log("STATE CONTAINS APPROX. " + detections.length + " DETECTIONS"); // detections count increments by 1,2, or 3 instead of always by 1. this could be a function of timing, where state updates faster than the console can log?
-    if (detections.length >= 10) {
-      //
-      // PREVENT INFINITE LOOPS!!!
-      //
-      this.setState({detections:[]}) // prevent this collection from growing out of hand, perhaps preventing memory management issues/crashes, but definitely preventing an infinite loop of mistaken detection counts.
-      this.stopDetectingBeacons();
-
-      //
-      // NAVIGATE TO INDEX PAGE
-      //
-      var synthesizedResults = synthesizeDetections(detections);
-      var beacons = mergeBeaconDetailsWithSynthesizedResults(synthesizedResults);
-      this.goIndex(beacons); // for now, short-cutting the UX to automatically navigate.
+    console.log("BEACON DETECTION ATTEMPT #" + this.state.detectionAttemptsCount);
+    if (this.state.detectionAttemptsCount < 10) {
+      this.setState({
+        detectionAttemptsCount: this.state.detectionAttemptsCount + 1,
+        detections: this.state.detections.concat(data.beacons)
+      });
     } else {
-      this.setState({detections: this.state.detections.concat(data.beacons)}); // append new detection results into state.
+      var synthesizedResults = synthesizeDetections(this.state.detections);
+      var beacons = mergeBeaconDetailsWithSynthesizedResults(synthesizedResults);
+      this.setState({detectionAttemptsCount:0, detections:[]})
+      this.stopDetectingBeacons();
+      this.goIndex(beacons);
     };
   },
 
   stopDetectingBeacons(){
-    this.beaconsDidRange = null;
     Beacons.stopRangingBeaconsInRegion('REGION1')
       .then(function(){  console.log("Beacon Ranging Stopped OK")  })
       .catch(function(error){  console.log("Beacon Ranging Stopped With ERR", error)  });
+    this.beaconsDidRange = null;
   },
 
   goIndex(beacons){

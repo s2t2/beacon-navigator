@@ -80,6 +80,8 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
   + https://medium.com/@dabit3/react-native-navigator-navigating-like-a-pro-in-react-native-3cb1b6dc1e30#.8ipo29wg6
     + https://rnplay.org/apps/jpeOww
     + https://rnplay.org/apps/ALL-Sw
+  + https://github.com/facebook/react-native/issues/1731
+  + https://github.com/facebook/react-native/issues/1731#issuecomment-183745968
 
 
 
