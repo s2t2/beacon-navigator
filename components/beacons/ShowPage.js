@@ -3,7 +3,7 @@ import {Text} from 'react-native';
 import {Container, Header, Content, Button, Icon, Card, CardItem} from 'native-base';
 
 import {styles} from "../../lib/styles";
-import {beaconPrettyDistance} from "../../lib/beacons_helper";
+import {beaconPrettyMedianDistance} from "../../lib/beacons_helper";
 
 const ShowPage = React.createClass({
   componentWillMount: function(){  console.log("SHOW WILL MOUNT")  },
@@ -33,7 +33,7 @@ const ShowPage = React.createClass({
               <Text>{beacon.details.displayName}</Text>
             </CardItem>
             <CardItem>
-              <Text>{beaconPrettyDistance(beacon)}</Text>
+              <Text>{beaconPrettyMedianDistance(beacon)}</Text>
             </CardItem>
             <CardItem>
               <Text>{beacon.details.description}</Text>

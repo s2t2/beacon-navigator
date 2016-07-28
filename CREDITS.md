@@ -133,3 +133,4 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
   + https://github.com/mmazzarolo/react-native-beacons-android
   + https://github.com/MacKentoch/reactNativeBeaconExample/blob/master/index.android.js
   + https://medium.com/@erwan.datin/mmazzarolohow-to-play-with-ibeacons-in-a-react-native-application-5cef754b2edc#.cjqg5o5uj
+  + https://github.com/mmazzarolo/react-native-beacons-android#beaconsstoprangingbeaconsinregion-promise

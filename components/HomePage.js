@@ -2,11 +2,10 @@ import React from 'react';
 import {Text, Alert, DeviceEventEmitter} from 'react-native';
 import {Container, Header, Footer, Content, Button, Icon, Spinner} from 'native-base';
 import Beacons from 'react-native-beacons-android';
-var d3 = require("d3");
 
 import {styles} from "../lib/styles";
 import {beaconsDidRangeResult} from "../lib/beacons_did_range_example_result";
-import {beaconId, lookupBeaconDetails, logBeacons, logBeaconsToCSV, logKnownBeacons, logKnownBeaconsToCSV} from "../lib/beacons_helper";
+import {beaconId, mergeBeaconDetails, logBeacons, logBeaconsToCSV, logKnownBeacons, logKnownBeaconsToCSV, synthesizeDetections, mergeBeaconDetailsWithSynthesizedResults} from "../lib/beacons_helper";
 
 const HomePage = React.createClass({
   getInitialState: function(){
@@ -18,7 +17,7 @@ const HomePage = React.createClass({
     Beacons.detectIBeacons();
     Beacons.startRangingBeaconsInRegion('REGION1')
       .then(function(){  console.log("Beacon Ranging OK")  })
-      .catch(function(error){  console.log("Beacon Ranging ERR", err)  })
+      .catch(function(error){  console.log("Beacon Ranging ERR", error)  });
   },
 
   componentDidMount: function(){
@@ -32,7 +31,7 @@ const HomePage = React.createClass({
 
   componentWillUnmount: function(){
     console.log("HOME WILL UNMOUNT");
-    this.beaconsDidRange = null;
+    this.stopDetectingBeacons();
   },
 
   render: function(){
@@ -61,7 +60,7 @@ const HomePage = React.createClass({
     var component = this;
     setTimeout(function(){
       var results = beaconsDidRangeResult; //TODO: stop mocking and get real response
-      var beacons = lookupBeaconDetails(results);
+      var beacons = mergeBeaconDetails(results);
       if (beacons.length > 0) {
         console.log("DETECTED SOME BEACONS");
         component.setState({displaySpinner: false});
@@ -77,50 +76,38 @@ const HomePage = React.createClass({
   // This function controls what happens with the results of beacon-detection efforts.
   // @param [Object] data A complete beaconsDidRangeResult. See data/mocks/beacons-did-range/ for examples.
   emitBeaconData: function(data){
-    //
-    // CHOOSE A LOGGING FLAVOR (OPTIONAL)...
-    //
     //console.log(data.beacons);
     //logBeacons(data.beacons);
     //logBeaconsToCSV(data.beacons);
     //logKnownBeacons(data.beacons);
     //logKnownBeaconsToCSV(data.beacons);
 
-    //
-    // COLLECT AND MANAGE RESULTS
-    //
     var detections = this.state.detections;
     console.log("---------------------")
     console.log("STATE CONTAINS APPROX. " + detections.length + " DETECTIONS"); // detections count increments by 1,2, or 3 instead of always by 1. this could be a function of timing, where state updates faster than the console can log?
     if (detections.length >= 10) {
       //
-      // REDUCE AND SYNTHESIZE RESULTS
+      // PREVENT INFINITE LOOPS!!!
       //
-      var groups = d3.nest()
-        .key(function(db){  return beaconId(db);  })
-        .rollup(function(rows){
-          return {
-            uuid: rows.map(function(r){  return r.uuid  })[0], // assumes all "uuid" values are the same, which should be the case when grouping by beaconId().
-            major: rows.map(function(r){  return r.major  })[0], // assumes all "major" values are the same, which should be the case when grouping by beaconId().,
-            minor: rows.map(function(r){  return r.minor  })[0], // assumes all "minor" values are the same, which should be the case when grouping by beaconId().,,
-            //detections: rows,
-            detectionCount: rows.length,
-            distances: rows.map(function(r){  return r.distance  }).sort(d3.ascending),
-            strengths: rows.map(function(r){  return r.rssi  }).sort(d3.ascending)
-          };
-        })
-        .entries(detections);
+      this.setState({detections:[]}) // prevent this collection from growing out of hand, perhaps preventing memory management issues/crashes, but definitely preventing an infinite loop of mistaken detection counts.
+      this.stopDetectingBeacons();
 
-      groups.sort(function(a, b){
-        return d3.ascending(  d3.median(a.value.distances), d3.median(b.value.distances)  );
-      });
-
-      console.log(groups);
-
-      this.setState({detections:[]}) // prevent this collection from growing out of hand, perhaps preventing memory management issues/crashes.
+      //
+      // NAVIGATE TO INDEX PAGE
+      //
+      var synthesizedResults = synthesizeDetections(detections);
+      var beacons = mergeBeaconDetailsWithSynthesizedResults(synthesizedResults);
+      this.goIndex(beacons); // for now, short-cutting the UX to automatically navigate.
     } else {
       this.setState({detections: this.state.detections.concat(data.beacons)}); // append new detection results into state.
     };
+  },
+
+  stopDetectingBeacons(){
+    this.beaconsDidRange = null;
+    Beacons.stopRangingBeaconsInRegion('REGION1')
+      .then(function(){  console.log("Beacon Ranging Stopped OK")  })
+      .catch(function(error){  console.log("Beacon Ranging Stopped With ERR", error)  });
   },
 
   goIndex(beacons){
