@@ -95,11 +95,13 @@ const HomePage = React.createClass({
     this.beaconsDidRange = null;
   },
 
-  goIndex(beacons){
+  // @param [] synthesizedAndMergedBeacons The result of merging beacon details with synthesized detection results. See data/mocks/synthesized-and-merged-beacons/ for examples.
+  goIndex(synthesizedAndMergedBeacons){
+    console.log("SYNTHESIZED AND MERGED BEACONS", synthesizedAndMergedBeacons)
     this.props.navigator.resetTo({
       name: 'Beacons',
       passProps: {
-        nearbyBeacons: beacons
+        nearbyBeacons: synthesizedAndMergedBeacons
       }
     }) // unlike navigator.push, navigator.replace and navigator.resetTo both trigger ComponentWillUnmount, but also logs an error message: "Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the HomePage component."
   }

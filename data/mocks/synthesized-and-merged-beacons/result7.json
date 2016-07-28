@@ -1,0 +1,60 @@
+[
+  {
+    "uuid":"b9407f30-f5f8-466e-aff9-25556b57fe6d",
+    "major":50644,
+    "minor":34745,
+    "detectionCount":9,
+    "distances":[
+      0.004389017964959747,
+      0.004389017964959747,
+      0.004468168573716172,
+      0.004548601520341872,
+      0.004797779886666507,
+      0.005240490566900371,
+      0.005705414437952002,
+      0.0061841912578585335,
+      0.007367073872664043
+    ],
+    "strengths":[
+      -43,
+      -43,
+      -43,
+      -43,
+      -43,
+      -43,
+      -43,
+      -43,
+      -43
+    ],
+    "details":{
+      "displayName":"Eiffel Tower",
+      "iconName":"md-map",
+      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    }
+  },
+  {
+    "uuid":"b9407f30-f5f8-466e-aff9-25556b57fe6d",
+    "major":51618,
+    "minor":2518,
+    "detectionCount":5,
+    "distances":[
+      0.03457161303360778,
+      0.03457161303360778,
+      0.03457161303360778,
+      0.03546836318953262,
+      0.0423549617320185
+    ],
+    "strengths":[
+      -66,
+      -65,
+      -65,
+      -65,
+      -65
+    ],
+    "details":{
+      "displayName":"Bibliothèque François Mitterrand Station",
+      "iconName":"ios-train",
+      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    }
+  }
+]
