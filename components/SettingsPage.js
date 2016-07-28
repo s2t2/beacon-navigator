@@ -9,13 +9,19 @@ const SettingsPage = React.createClass({
     return {
       modes:[
         {
-          id: "detection-mode",
+          id: "detection",
           name:"Detection Mode",
           selected: true,
           homeRouteName: "Home"
         },
+        //{
+        //  id: "auto-detect",
+        //  name:"Auto-detection Mode",
+        //  selected: true,
+        //  homeRouteName: "Auto"
+        //},
         {
-          id: "journey-mode",
+          id: "journey",
           name:"Journey Mode",
           selected: false,
           homeRouteName: "Journeys"
@@ -43,10 +49,8 @@ const SettingsPage = React.createClass({
         </Header>
 
         <Content style={styles.content}>
+          <Text style={styles.pageHeading}>Please select a use case ...</Text>
           <List>
-            <ListItem key="list-header" itemDivider style={styles.listHeader}>
-              <Text style={styles.listHeaderTitle}>Please choose a presentation mode ...</Text>
-            </ListItem>
             {
               this.state.modes.map(function(mode){
                 return (

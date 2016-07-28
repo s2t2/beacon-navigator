@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text} from 'react-native';
-import {Container, Header, Footer, Content, Button, Icon, Title} from 'native-base';
+import {Text, Image} from 'react-native';
+import {Container, Header, Footer, Content, Button, Icon, Title, Card, CardItem, Thumbnail, List, ListItem} from 'native-base';
 
 import {styles} from "../../lib/styles";
 
@@ -19,11 +19,46 @@ const JourneysIndexPage = React.createClass({
           <Button transparent onPress={this.handleSettingsButtonPress}>
             <Icon name="ios-menu" style={styles.headerIcon}/>
           </Button>
-          <Title style={styles.title}>{ /* JOURNEYS */ }</Title>
+          <Title style={styles.title}>{ /* Journeys */ }</Title>
         </Header>
 
         <Content style={styles.content}>
-          <Text style={styles.text}>Please select a Parisian Journey ...</Text>
+          <Text style={styles.pageHeading}>Please select a Parisian Journey ...</Text>
+
+          <Card>
+            <CardItem >
+              <Thumbnail source={require('../../images/business/kat.jpg')} />
+              <Text>Kat's Office Adventure</Text>
+              <Text note>July 27, 2016</Text>
+            </CardItem>
+            <CardItem cardBody>
+              <Image style={{ resizeMode: 'cover' }} source={require('../../images/business/kat.jpg')} />
+              <Button transparent textStyle={{color: '#87838B'}}>389 Stars</Button>
+            </CardItem>
+          </Card>
+
+          <Card style={{marginTop:15}}>
+            <CardItem >
+              <Thumbnail source={require('../../images/local/rose.jpg')} />
+              <Text>Rose's Local Secrets</Text>
+              <Text note>July 21, 2016</Text>
+            </CardItem>
+            <CardItem cardBody>
+              <Image style={{ resizeMode: 'cover' }} source={require('../../images/local/chalet.jpg')} />
+              <Button transparent textStyle={{color: '#87838B'}}>167 Stars</Button>
+            </CardItem>
+          </Card>
+
+
+
+
+
+
+
+
+
+
+
         </Content>
       </Container>
     );

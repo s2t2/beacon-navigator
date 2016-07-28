@@ -58,7 +58,7 @@ const App = React.createClass({
     return (
       <Navigator
         style={{ flex:1 }}
-        initialRoute={{ name: 'Home' }} // Specify which component should show up when the app is loaded.
+        initialRoute={{ name: 'Journeys' }} // Specify which component should show up when the app is loaded.
         renderScene={ this.renderScene }
         configureScene={ this.configureScene }
       />
