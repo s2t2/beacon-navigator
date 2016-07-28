@@ -8,8 +8,18 @@ const SettingsPage = React.createClass({
   getInitialState: function(){
     return {
       modes:[
-        {name:"Detection Mode", id: "detection-mode", selected: true},
-        {name:"Walking Tour Mode", id: "walking-tour-mode", selected: false}
+        {
+          id: "detection-mode",
+          name:"Detection Mode",
+          selected: true,
+          homeRouteName: "Home"
+        },
+        {
+          id: "walking-tour-mode",
+          name:"Walking Tour Mode",
+          selected: false,
+          homeRouteName: "Home"
+        }
       ]
     }
   },
@@ -55,7 +65,7 @@ const SettingsPage = React.createClass({
 
   handleSettingsButtonPress: function(){
     console.log("PRESSED SETTINGS BUTTON AGAIN")
-    this.goBack()
+    this.goHome()
   },
 
   handleRadioSelect: function(selectedMode){
@@ -73,10 +83,12 @@ const SettingsPage = React.createClass({
     this.setState({modes: modes});
   },
 
-  goBack: function(){
+  goHome: function(){
+    var selectedMode = this.state.modes.filter(function(mode){  return mode.selected == true; })[0];
+    var component = this;
     this.props.navigator.push({
-      name:"Home",
-      type:"Menu"
+      name: selectedMode.homeRouteName,
+      type: "Menu"
     })
   }
 });
