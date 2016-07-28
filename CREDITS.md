@@ -6,6 +6,16 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
 
   + http://stackoverflow.com/questions/11901074/javascript-call-a-function-after-specific-time-period
 
+## d3
+
+  + https://github.com/d3/d3-collection/blob/master/README.md#nest
+  + https://github.com/s2t2/cfa-violations/blob/5ce5dfb0db867bdd25e9cb65c8d0ce02531ea3cd/index.html
+  + https://github.com/d3/d3-array/blob/master/README.md#median
+
+## Developer Tools (JSON formatting)
+
+  + https://jsonformatter.curiousconcept.com/
+
 ## React
 
   + https://facebook.github.io/react/docs/component-specs.html
