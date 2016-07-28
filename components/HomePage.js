@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, Alert, DeviceEventEmitter} from 'react-native';
-import {Container, Header, Footer, Content, Button, Icon, Spinner} from 'native-base';
+import {Container, Header, Footer, Content, Button, Icon, Spinner, Title} from 'native-base';
 import Beacons from 'react-native-beacons-android';
 
 import {beaconId, mergeBeaconDetails, logBeacons, logBeaconsToCSV, logKnownBeacons, logKnownBeaconsToCSV, synthesizeDetections, mergeBeaconDetailsWithSynthesizedResults} from "../lib/beacons_helper";
@@ -38,22 +38,25 @@ const HomePage = React.createClass({
     if (!mockBluetooth) {
       this.stopDetectingBeacons();
     };
-  },
+  }, // when navigating, must use either navigator.replace or navigator.resetTo beacause these trigger trigger the ComponentWillUnmount lifecycle event, unlike navigator.push, which does not.
 
   render: function(){
     return (
       <Container style={styles.container}>
         <Header style={styles.header}>
-          <Text style={styles.title}>Beacon Navigator</Text>
+          <Button transparent onPress={this.handleSettingsButtonPress}>
+            <Icon name="ios-menu" style={styles.settingsIcon}/>
+          </Button>
+          <Title style={styles.title}>{ /* Beacon Navigator */ }</Title>
         </Header>
 
         <Content style={styles.content}>
-          <Text style={styles.text}>Tap the button to detect nearby points of interest based on proximity to Bluetooth beacons.</Text>
+          <Text style={styles.text}>Tap the button below to detect nearby points of interest based on proximity to Bluetooth beacons.</Text>
           {this.state.displaySpinner ? <Spinner color="#428bca" size="large"/> : null}
         </Content>
 
         <Footer style={styles.footer}>
-          <Button style={styles.button} onPress={this.handleButtonPress}>
+          <Button style={styles.button} onPress={this.handleDetectionButtonPress}>
             <Icon name="ios-radio-outline" />
           </Button>
         </Footer>
@@ -61,7 +64,11 @@ const HomePage = React.createClass({
     );
   },
 
-  handleButtonPress: function(){
+  handleSettingsButtonPress: function(){
+    this.goSettings()
+  },
+
+  handleDetectionButtonPress: function(){
     this.setState({displaySpinner: true, collectDetectionResults: true});
     if (mockBluetooth) {
       var component = this;
@@ -122,7 +129,14 @@ const HomePage = React.createClass({
       passProps: {
         nearbyBeacons: synthesizedAndMergedBeacons
       }
-    }); // unlike navigator.push, navigator.replace and navigator.resetTo both trigger ComponentWillUnmount.
+    });
+  },
+
+  goSettings: function(){
+    console.log("TODO: Navigate to settings menu")
+    //this.props.navigator.resetTo({
+    //  name: 'Settings'
+    //});
   }
 });
 
