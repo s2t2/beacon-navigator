@@ -30,9 +30,8 @@ const HomePage = React.createClass({
   componentDidUpdate: function(prevProps, prevState){  console.log("HOME DID UPDATE")  },
 
   componentWillUnmount: function(){
-    console.log("HOME WILL UNMOUNT ?????????????????????");
-    //this.beaconsDidRange = null;
-    this.stopDetectingBeacons();
+    console.log("HOME WILL UNMOUNT !!!");
+    this.stopDetectingBeacons()
   },
 
   render: function(){
@@ -94,7 +93,6 @@ const HomePage = React.createClass({
       var synthesizedResults = synthesizeDetections(this.state.detections);
       var beacons = mergeBeaconDetailsWithSynthesizedResults(synthesizedResults);
       this.setState({detectionAttemptsCount:0, detections:[]})
-      this.stopDetectingBeacons();
       this.goIndex(beacons);
     };
   },
@@ -107,12 +105,12 @@ const HomePage = React.createClass({
   },
 
   goIndex(beacons){
-    this.props.navigator.push({
+    this.props.navigator.resetTo({
       name: 'Beacons',
       passProps: {
         nearbyBeacons: beacons
       }
-    })
+    }) // unlike navigator.push, navigator.replace and navigator.resetTo both trigger ComponentWillUnmount, but also logs an error message: "Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the HomePage component."
   }
 });
 

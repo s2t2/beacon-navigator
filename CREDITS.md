@@ -80,8 +80,17 @@ See [previous repo](https://github.com/s2t2/beacon-finder) for additional commit
   + https://medium.com/@dabit3/react-native-navigator-navigating-like-a-pro-in-react-native-3cb1b6dc1e30#.8ipo29wg6
     + https://rnplay.org/apps/jpeOww
     + https://rnplay.org/apps/ALL-Sw
-  + https://github.com/facebook/react-native/issues/1731
-  + https://github.com/facebook/react-native/issues/1731#issuecomment-183745968
+
+#### How to Navigate such that a Component will Unmount?
+
+  + https://github.com/mmazzarolo/react-native-beacons-android/issues/16
+    + https://github.com/facebook/react-native/issues/1731
+    + https://github.com/facebook/react-native/issues/1731#issuecomment-183745968
+    + https://github.com/react-native-simple-router-community/react-native-simple-router/issues/30
+    + https://github.com/facebook/react-native/blob/a2fb703bbb988038323c55b29b40e8f5ff52966d/Examples/UIExplorer/js/Navigator/NavigatorExample.js
+    + https://blog.nativebase.io/the-caveats-of-using-navigator-in-react-native-9547d99172ce#.5nf2trpa9
+    + https://facebook.github.io/react-native/docs/navigator.html#additional-scenes
+    + https://blog.nativebase.io/the-caveats-of-using-navigator-in-react-native-9547d99172ce#.i4122zz2x
 
 
 
