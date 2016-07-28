@@ -4,11 +4,10 @@ import {AppRegistry, Navigator} from 'react-native';
 import HomePage from "./components/HomePage";
 import BeaconsIndexPage from "./components/beacons/IndexPage";
 import BeaconsShowPage from "./components/beacons/ShowPage";
-import {presentationMode} from "./lib/dev_helper";
-
-if (presentationMode == true) {
-  console.ignoredYellowBox = ['Warning: setState(...)']; // for demonstration purposes, ignore the warning message: "Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the HomePage component."
-};
+//import {presentationMode} from "./lib/dev_helper";
+//if (presentationMode == true) {
+//  console.ignoredYellowBox = ['Warning: setState(...)']; // for demonstration purposes, ignore the warning message: "Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the HomePage component."
+//}; OK SO IT TURNS OUT THE WARNING MESSAGES THAT WERE PREVIOUSLY GETTING DISPLAYED HAVE BEEN FIXED, SO DON'T NEED THIS RIGHT NOW, BUT LEAVING THE OPTION HERE FOR THE FUTURE...
 
 // This component controls navigation between other components.
 const App = React.createClass({
