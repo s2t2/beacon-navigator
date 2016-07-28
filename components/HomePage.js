@@ -79,10 +79,12 @@ const HomePage = React.createClass({
       } else {
         var synthesizedResults = synthesizeDetections(this.state.detections);
         var beacons = mergeBeaconDetailsWithSynthesizedResults(synthesizedResults);
-        //todo: alert if no beacons detected
-
         this.setState({detectionAttemptsCount:0, detections:[], displaySpinner:false, collectDetectionResults: false})
-        this.goIndex(beacons);
+        if (beacons.length > 0) {
+          this.goIndex(beacons);
+        } else {
+          return Alert.alert("No Beacons Nearby", "Hey, it looks like there aren't any Bluetooth beacons around you right now. Please move to a different location and try again.");
+        };
       };
     }
   },
