@@ -5,6 +5,8 @@ import HomePage from "./components/HomePage";
 import SettingsPage from "./components/SettingsPage";
 import BeaconsIndexPage from "./components/beacons/IndexPage";
 import BeaconsShowPage from "./components/beacons/ShowPage";
+import ToursIndexPage from "./components/tours/IndexPage";
+
 //import {presentationMode} from "./lib/dev_helper";
 //if (presentationMode == true) {
 //  console.ignoredYellowBox = ['Warning: setState(...)']; // for demonstration purposes, ignore the warning message: "Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the HomePage component."
@@ -32,6 +34,9 @@ const App = React.createClass({
         break;
       case 'Settings':
         return <SettingsPage navigator={navigator} {...route.passProps}  />
+        break;
+      case 'Tours':
+        return <ToursIndexPage navigator={navigator} {...route.passProps}  />
         break;
     };
   },

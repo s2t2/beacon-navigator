@@ -18,7 +18,7 @@ const SettingsPage = React.createClass({
           id: "walking-tour-mode",
           name:"Walking Tour Mode",
           selected: false,
-          homeRouteName: "Home"
+          homeRouteName: "Tours"
         }
       ]
     }
