@@ -83,7 +83,7 @@ const JourneysIndexPage = React.createClass({
       name: "Journey",
       passProps:{
         journey: journey,
-        stopIndex: 0
+        stopIndex: null
       }
     })
   }

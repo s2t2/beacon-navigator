@@ -36,6 +36,31 @@ const JourneysShowPage = React.createClass({
     var journey = this.props.journey;
     var stopIndex = this.props.stopIndex;
 
+    var journeyDescriptionCardItem = (
+      <CardItem>
+        <Text>{journey.text}</Text>
+      </CardItem>
+    )
+
+    var journeySubtitle = "(" + journey.stops.length + " Stops)"
+
+    if (stopIndex == null){
+      var nextStopIndex = 0;
+      var directionsToNextStop = journey.next;
+    } else {
+      var nextStopIndex = stopIndex + 1;
+      var directionsToNextStop = journey.stops[stopIndex].next;
+    }; // this feels dirty
+
+    var nextStopSubtitle = "(" + (nextStopIndex + 1) + " of " + journey.stops.length + ")";
+    var nextStopImageSource = images[journey.name]["stopImages"][nextStopIndex];
+    var forwardButton = (
+      <Button transparent onPress={function(){  return component.goForward(journey, nextStopIndex)  }}>
+        <Icon name="md-arrow-forward" style={styles.headerIcon}/>
+      </Button>
+    );
+    var conditionallyDisplayedForwardButton = (nextStopIndex < (journey.stops.length - 1) ? forwardButton : null);
+
     return (
       <Container style={styles.container}>
         <Header style={styles.header}>
@@ -43,28 +68,24 @@ const JourneysShowPage = React.createClass({
             <Icon name="md-arrow-back" style={styles.headerIcon}/>
           </Button>
           <Text style={styles.title}>{ /* Journey */ }</Text>
+          {conditionallyDisplayedForwardButton}
         </Header>
 
         <Content style={styles.content}>
           <Card>
             <CardItem header>
               <Thumbnail source={images[journey.name]["authorImage"]} />
-              <Text>{journey.title} ({journey.stops.length} Stops)</Text>
+              <Text>{journey.title} {journeySubtitle}</Text>
             </CardItem>
-            <CardItem>
-              <Text>{journey.text}</Text>
-            </CardItem>
+            { journeyDescriptionCardItem }
             <CardItem header>
-              <Text>Next Stop: {journey.stops[stopIndex].title}</Text>
+              <Text>Next Stop: {journey.stops[nextStopIndex].title} {nextStopSubtitle}</Text>
             </CardItem>
             <CardItem cardBody>
-              <Text style={{marginBottom:10}}>{journey.next}</Text>
-              <Image style={{ resizeMode: 'cover' }} source={images[journey.name]["stopImages"][stopIndex]} />
+              <Text style={{marginBottom:10}}>{directionsToNextStop}</Text>
+              <Image style={{ resizeMode: 'cover' }} source={nextStopImageSource} />
             </CardItem>
           </Card>
-
-
-
 
         </Content>
       </Container>
@@ -72,9 +93,20 @@ const JourneysShowPage = React.createClass({
   },
 
   goBack: function(){
+    //this.props.navigator.push({
+    //  name: "Journeys",
+    //  type: "Back"
+    //})
+    this.props.navigator.pop()
+  },
+
+  goForward: function(journey, nextStopIndex){
     this.props.navigator.push({
-      name: "Journeys",
-      type: "Back"
+      name: "Journey",
+      passProps:{
+        journey: journey,
+        stopIndex: nextStopIndex
+      }
     })
   }
 });
