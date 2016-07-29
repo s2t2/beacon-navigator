@@ -66,14 +66,23 @@ const JourneysIndexPage = React.createClass({
   },
 
   goSettings: function(){
-    this.props.navigator.resetTo({
+    this.props.navigator.push({
       name: 'Settings'
     });
   },
 
   handleCardPress: function(journeyName){
-    console.log("PRESSED A CARD", journeyName)
+    this.goJourney(journeyName);
   },
+
+  goJourney: function(journeyName){
+    this.props.navigator.push({
+      name: "Journey",
+      passProps:{
+        journeyName: journeyName
+      }
+    })
+  }
 });
 
 module.exports = JourneysIndexPage;

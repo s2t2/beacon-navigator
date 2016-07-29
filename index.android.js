@@ -6,6 +6,7 @@ import SettingsPage from "./components/SettingsPage";
 import BeaconsIndexPage from "./components/beacons/IndexPage";
 import BeaconsShowPage from "./components/beacons/ShowPage";
 import JourneysIndexPage from "./components/journeys/IndexPage";
+import JourneysShowPage from "./components/journeys/ShowPage";
 
 //import {presentationMode} from "./lib/dev_helper";
 //if (presentationMode == true) {
@@ -37,6 +38,9 @@ const App = React.createClass({
         break;
       case 'Journeys':
         return <JourneysIndexPage navigator={navigator} {...route.passProps}  />
+        break;
+      case 'Journey':
+        return <JourneysShowPage navigator={navigator} {...route.passProps}  />
         break;
     };
   },
