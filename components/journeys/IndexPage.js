@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, Image} from 'react-native';
 import {Container, Header, Footer, Content, Button, Icon, Title, Card, CardItem, Thumbnail, List, ListItem} from 'native-base';
 
-import {journeys} from "../../lib/journeys_helper";
+import journeys from "../../lib/journeys_helper";
 import {styles} from "../../lib/styles";
 
 var images = {
@@ -45,7 +45,7 @@ const JourneysIndexPage = React.createClass({
                <Card key={journey.name} style={{marginTop:15}}>
                  <CardItem >
                    <Thumbnail source={images[journey.name]["authorImage"]} />
-                   <Text onPress={function(){  component.handleCardPress("local")  } /* need this wrapper function to prevent inner function from being executed on render */}>
+                   <Text onPress={function(){  component.handleCardPress(journey)  } /* need this wrapper function to prevent inner function from being executed on render */}>
                      {journey.title}
                    </Text>
                    <Text note>{journey.publishedOn}</Text>
@@ -58,11 +58,6 @@ const JourneysIndexPage = React.createClass({
               )
             })
           }
-
-
-
-
-
 
         </Content>
       </Container>
@@ -79,15 +74,16 @@ const JourneysIndexPage = React.createClass({
     });
   },
 
-  handleCardPress: function(journeyName){
-    this.goJourney(journeyName);
+  handleCardPress: function(journey){
+    this.goJourney(journey);
   },
 
-  goJourney: function(journeyName){
+  goJourney: function(journey){
     this.props.navigator.push({
       name: "Journey",
       passProps:{
-        journeyName: journeyName
+        journey: journey,
+        stopIndex: 0
       }
     })
   }
