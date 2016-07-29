@@ -14,9 +14,9 @@ var images = {
     authorImage: require('../../images/local/rose.jpg'),
     coverImage: require('../../images/local/chalet.jpg')
   },
-    tourist:{
-    authorImage: require('../../images/business/kat.jpg'),
-    coverImage: require('../../images/business/farago.jpg')
+  tourist:{
+    authorImage: require('../../images/tourist/rer.png'),
+    coverImage: require('../../images/tourist/rer-a-mi09.jpg')
   }
 };
 

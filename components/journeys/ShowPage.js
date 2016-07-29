@@ -20,6 +20,14 @@ var images = {
       require('../../images/local/desnoyer.jpg'),
       require('../../images/local/chalet.jpg')
     ]
+  },
+  tourist:{
+    authorImage: require('../../images/tourist/rer.png'),
+    stopImages:[
+      require('../../images/tourist/rer-a-mi09.jpg'),
+      require('../../images/tourist/rer-a-mi09.jpg'),
+      require('../../images/tourist/rer-a-mi09.jpg')
+    ]
   }
 };
 
