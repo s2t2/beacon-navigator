@@ -13,6 +13,10 @@ var images = {
   local:{
     authorImage: require('../../images/local/rose.jpg'),
     coverImage: require('../../images/local/chalet.jpg')
+  },
+    tourist:{
+    authorImage: require('../../images/business/kat.jpg'),
+    coverImage: require('../../images/business/farago.jpg')
   }
 };
 
