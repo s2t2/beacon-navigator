@@ -24,7 +24,15 @@ var images = {
 };
 
 const JourneysShowPage = React.createClass({
-  componentWillMount: function(){  console.log("JOURNEY WILL MOUNT")  },
+  componentWillMount: function(){
+    console.log("JOURNEY WILL MOUNT")
+    if (this.nextStopExists(this.props.journey, this.props.stopIndex)) {
+      var component = this;
+      setTimeout(function(){
+        component.goForward(component.props.journey, component.nextStopIndex(component.props.stopIndex))
+      }, 8000);
+    }
+  },
   componentDidMount: function(){  console.log("JOURNEY DID MOUNT")  },
   componentWillReceiveProps: function(nextProps){  console.log("JOURNEY WILL RECEIVE PROPS")  },
   componentWillUpdate: function(nextProps, nextState){  console.log("JOURNEY WILL UPDATE")  },
@@ -33,6 +41,7 @@ const JourneysShowPage = React.createClass({
 
   render: function(){
     var component = this;
+
     var journey = this.props.journey;
     var stopIndex = this.props.stopIndex;
 
@@ -40,18 +49,11 @@ const JourneysShowPage = React.createClass({
       <CardItem>
         <Text>{journey.text}</Text>
       </CardItem>
-    )
+    );
+    var journeySubtitle = "(" + journey.stops.length + " Stops)";
 
-    var journeySubtitle = "(" + journey.stops.length + " Stops)"
-
-    if (stopIndex == null){
-      var nextStopIndex = 0;
-      var directionsToNextStop = journey.next;
-    } else {
-      var nextStopIndex = stopIndex + 1;
-      var directionsToNextStop = journey.stops[stopIndex].next;
-    }; // this feels dirty
-
+    var nextStopIndex = this.nextStopIndex(stopIndex);
+    var directionsToNextStop = this.directionsToNextStop(journey, stopIndex);
     var nextStopSubtitle = "(" + (nextStopIndex + 1) + " of " + journey.stops.length + ")";
     var nextStopImageSource = images[journey.name]["stopImages"][nextStopIndex];
     var forwardButton = (
@@ -59,7 +61,8 @@ const JourneysShowPage = React.createClass({
         <Icon name="md-arrow-forward" style={styles.headerIcon}/>
       </Button>
     );
-    var conditionallyDisplayedForwardButton = (nextStopIndex < (journey.stops.length - 1) ? forwardButton : null);
+    var conditionallyDisplayedForwardButton = (component.nextStopExists(journey, stopIndex) ? forwardButton : null);
+    var conditionallyDisplayedForwardButton = null; // hide the button for now.
 
     return (
       <Container style={styles.container}>
@@ -85,6 +88,9 @@ const JourneysShowPage = React.createClass({
               <Text style={{marginBottom:10}}>{directionsToNextStop}</Text>
               <Image style={{ resizeMode: 'cover' }} source={nextStopImageSource} />
             </CardItem>
+            <CardItem>
+              <Text>When you get close to your destination, you will receive a notification.</Text>
+            </CardItem>
           </Card>
 
         </Content>
@@ -92,12 +98,28 @@ const JourneysShowPage = React.createClass({
     );
   },
 
+  nextStopIndex: function(stopIndex){
+    if (stopIndex == null){
+      return 0;
+    } else {
+      return stopIndex + 1;
+    };
+  },
+
+  nextStopExists: function(journey, stopIndex){
+    return this.nextStopIndex(stopIndex) < (journey.stops.length - 1)
+  },
+
+  directionsToNextStop: function(journey, stopIndex){
+    if (stopIndex == null){
+      return journey.next;
+    } else {
+      return directionsToNextStop = journey.stops[stopIndex].next;
+    };
+  },
+
   goBack: function(){
-    //this.props.navigator.push({
-    //  name: "Journeys",
-    //  type: "Back"
-    //})
-    this.props.navigator.pop()
+    this.props.navigator.pop();
   },
 
   goForward: function(journey, nextStopIndex){
