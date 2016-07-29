@@ -2,7 +2,19 @@ import React from 'react';
 import {Text, Image} from 'react-native';
 import {Container, Header, Footer, Content, Button, Icon, Title, Card, CardItem, Thumbnail, List, ListItem} from 'native-base';
 
+import {journeys} from "../../lib/journeys_helper";
 import {styles} from "../../lib/styles";
+
+var images = {
+  business:{
+    authorImage: require('../../images/business/kat.jpg'),
+    coverImage: require('../../images/business/farago.jpg')
+  },
+  local:{
+    authorImage: require('../../images/local/rose.jpg'),
+    coverImage: require('../../images/local/chalet.jpg')
+  }
+};
 
 const JourneysIndexPage = React.createClass({
   componentWillMount: function(){  console.log("JOURNEYS WILL MOUNT");  },
@@ -27,33 +39,29 @@ const JourneysIndexPage = React.createClass({
         <Content style={styles.content}>
           <Text style={styles.pageHeading}>Please select a Parisian Journey ...</Text>
 
-          <Card>
-            <CardItem >
-              <Thumbnail source={require('../../images/business/kat.jpg')} />
-              <Text onPress={function(){  component.handleCardPress("business")  } /* need this wrapper function to prevent inner function from being executed on render */}>
-                Kat's Office Adventure
-              </Text>
-              <Text note>July 27, 2016</Text>
-            </CardItem>
-            <CardItem cardBody>
-              <Image style={{ resizeMode: 'cover' }} source={require('../../images/business/farago.jpg')} />
-              <Button transparent textStyle={{color: '#87838B'}}>389 Stars</Button>
-            </CardItem>
-          </Card>
+          {
+            journeys.map(function(journey){
+              return (
+               <Card key={journey.name} style={{marginTop:15}}>
+                 <CardItem >
+                   <Thumbnail source={images[journey.name]["authorImage"]} />
+                   <Text onPress={function(){  component.handleCardPress("local")  } /* need this wrapper function to prevent inner function from being executed on render */}>
+                     {journey.title}
+                   </Text>
+                   <Text note>{journey.publishedOn}</Text>
+                 </CardItem>
+                 <CardItem cardBody>
+                   <Image style={{ resizeMode: 'cover' }} source={images[journey.name]["coverImage"]} />
+                   <Button transparent textStyle={{color: '#87838B'}}>{journey.starsCount.toString() + " Stars"}</Button>
+                 </CardItem>
+               </Card>
+              )
+            })
+          }
 
-          <Card style={{marginTop:15}}>
-            <CardItem >
-              <Thumbnail source={require('../../images/local/rose.jpg')} />
-              <Text onPress={function(){  component.handleCardPress("local")  } /* need this wrapper function to prevent inner function from being executed on render */}>
-                Rose's Local Secrets
-              </Text>
-              <Text note>July 21, 2016</Text>
-            </CardItem>
-            <CardItem cardBody>
-              <Image style={{ resizeMode: 'cover' }} source={require('../../images/local/chalet.jpg')} />
-              <Button transparent textStyle={{color: '#87838B'}}>167 Stars</Button>
-            </CardItem>
-          </Card>
+
+
+
 
 
         </Content>
