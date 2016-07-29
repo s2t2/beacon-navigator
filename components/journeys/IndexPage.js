@@ -13,6 +13,8 @@ const JourneysIndexPage = React.createClass({
   componentWillUnmount: function(){  console.log("JOURNEYS WILL UNMOUNT");  },
 
   render: function(){
+    var component = this;
+
     return (
       <Container style={styles.container}>
         <Header style={styles.header}>
@@ -28,11 +30,13 @@ const JourneysIndexPage = React.createClass({
           <Card>
             <CardItem >
               <Thumbnail source={require('../../images/business/kat.jpg')} />
-              <Text>Kat's Office Adventure</Text>
+              <Text onPress={function(){  component.handleCardPress("business")  } /* need this wrapper function to prevent inner function from being executed on render */}>
+                Kat's Office Adventure
+              </Text>
               <Text note>July 27, 2016</Text>
             </CardItem>
             <CardItem cardBody>
-              <Image style={{ resizeMode: 'cover' }} source={require('../../images/business/kat.jpg')} />
+              <Image style={{ resizeMode: 'cover' }} source={require('../../images/business/farago.jpg')} />
               <Button transparent textStyle={{color: '#87838B'}}>389 Stars</Button>
             </CardItem>
           </Card>
@@ -40,7 +44,9 @@ const JourneysIndexPage = React.createClass({
           <Card style={{marginTop:15}}>
             <CardItem >
               <Thumbnail source={require('../../images/local/rose.jpg')} />
-              <Text>Rose's Local Secrets</Text>
+              <Text onPress={function(){  component.handleCardPress("local")  } /* need this wrapper function to prevent inner function from being executed on render */}>
+                Rose's Local Secrets
+              </Text>
               <Text note>July 21, 2016</Text>
             </CardItem>
             <CardItem cardBody>
@@ -48,15 +54,6 @@ const JourneysIndexPage = React.createClass({
               <Button transparent textStyle={{color: '#87838B'}}>167 Stars</Button>
             </CardItem>
           </Card>
-
-
-
-
-
-
-
-
-
 
 
         </Content>
@@ -72,7 +69,11 @@ const JourneysIndexPage = React.createClass({
     this.props.navigator.resetTo({
       name: 'Settings'
     });
-  }
+  },
+
+  handleCardPress: function(journeyName){
+    console.log("PRESSED A CARD", journeyName)
+  },
 });
 
 module.exports = JourneysIndexPage;
