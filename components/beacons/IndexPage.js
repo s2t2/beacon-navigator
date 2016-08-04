@@ -33,18 +33,14 @@ const IndexPage = React.createClass({
             </ListItem>
             {
               beacons.map(function(beacon){
-                if (beacon) {
-                  if (beacon.details) {
-                    return (
-                      <ListItem key={beaconId(beacon)}>
-                        <Button transparent onPress={function(){  component.goShow(beacon, beacons)  } /* need this wrapper function to prevent inner function from being executed on render */}>
-                          <Icon name={beacon.details.iconName}></Icon>
-                          <Text>{beacon.details.displayName}</Text>
-                        </Button>
-                      </ListItem>
-                    );
-                  }
-                }
+                return (
+                  <ListItem key={beaconId(beacon)}>
+                    <Button transparent onPress={function(){  component.goShow(beacon, beacons)  } /* need this wrapper function to prevent inner function from being executed on render */}>
+                      <Icon name={beacon.details.iconName}></Icon>
+                      <Text>{beacon.details.displayName}</Text>
+                    </Button>
+                  </ListItem>
+                );
               })
             }
           </List>

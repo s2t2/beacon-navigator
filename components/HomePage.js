@@ -97,7 +97,6 @@ const HomePage = React.createClass({
         });
       } else {
         var synthesizedResults = synthesizeDetections(this.state.detections);
-        console.log("WATTT", synthesizedResults)
         var synthesizedAndMergedBeacons = mergeBeaconDetailsWithSynthesizedResults(synthesizedResults);
         this.navigateOrAlert(synthesizedAndMergedBeacons);
       };
