@@ -4,6 +4,10 @@ A react-native android application
  to detect nearby points of interest
  based on proximity to Bluetooth beacons.
 
+Concept by [Eyal Feder](https://twitter.com/eyalFeder), [Eugena Ossi](https://twitter.com/genemumbles) and [MJ Rossetti](https://twitter.com/s2t2) during the 2016 [Paris Summer Innovation Fellowship](http://www.summerfellows.paris/).
+
+![a demonstration of app functionality](/images/demo.gif)
+
 ## Contributing
 
 ### Prerequisites
